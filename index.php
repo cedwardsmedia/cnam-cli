@@ -71,7 +71,7 @@
                 } else {
                     $title .= $this->data->data->expanded_name->first . ' ' . $this->data->data->expanded_name->last;
                 }
-                $title .= ' provided by iCNAM';
+                $title .= ' provided by CNAM';
             } else {
                 $title .= 'Reverse Phone Lookup powered by EveryoneAPI';
             }
@@ -141,7 +141,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">iCNAM</a>
+                <a class="navbar-brand" href="/">CNAM</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -149,9 +149,9 @@
                     <li><a href="#" data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-lg"></i> </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://www.twitter.com/cedwardsmedia" target="_blank"><i class="fa fa-twitter-square fa-lg"></i></a></li>
                     <li><a href="https://www.twitter.com/cedwardsmedia" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
-                    <li><a href="https://www.facebook.com/cedwardsmedia" target="_blank"><i class="fa fa-facebook-square fa-lg"></i></a></li>
+                    <li><a href="https://www.facebook.com/cedwardsmedia" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href="https://www.github.com/cedwardsmedia" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -289,7 +289,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 <!-- Modal -->
 <script>
     var save_creds = function() {
-        $.post('/save.php',
+        $.post('/auth.php',
             {
                 sid: $('#sid').val(),
                 token: $('#token').val()
@@ -347,7 +347,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                                 </label>
                             </div>
                             <br />
-                            <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via iCNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
+                            <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via CNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
                         </div>
                     </div>
                 </div>
@@ -367,16 +367,14 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="settingsLabel">About iCNAM</h4>
+                <h4 class="modal-title" id="settingsLabel">CNAM v1.0&#946;</h4>
             </div>
             <div class="modal-body">
-                <img src="apple-icon-120x120.png" alt="iCNAM Logo" class="pull-right" style="padding-right: 24px;">
-                <h1>iCNAM <small>0.0.7</small></h1>
-                <h3>Built by</h3>
-                <h4>Corey Edwards <span class="text-muted">[Code &amp; Design]</span></h4>
-                <h4>Brian Seymour <span class="text-muted">[Debugging]</span></h4>
-                <br />
-                <p class="text-muted text-center">iCNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
+                <div class="codelove text-center">
+                   <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
+                </div>
+                <hr>
+                <p class="text-muted text-center">CNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
 
 
                 <div class="modal-footer">

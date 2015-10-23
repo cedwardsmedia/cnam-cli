@@ -108,3 +108,20 @@ body {
 .navbar-right *{
    color: #6F5499;
 }
+.codelove {
+   font-size: 32px;
+   color: #504346;
+}
+.codelove img {
+   border-radius: 16px;
+   width: 32px;
+   filter: grayscale(1);
+   position: relative;
+   top: -2px;
+}
+.codelove img:hover {
+   filter: grayscale(0);
+}
+.text-math {
+   color: #ccc;
+}
