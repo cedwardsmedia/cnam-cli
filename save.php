@@ -1,25 +1,37 @@
 <?php
-/* These are our valid username and passwords */
 
-if (isset($_GET['SID']) && isset($_GET['token'])) {
+ini_set('display_errors', 0);
+error_reporting(E_ALL & ~E_NOTICE);
 
-        if (isset($_GET['rememberme'])) {
-            /* Set cookie to last 1 year */
-            setcookie('SID', $_GET['SID'], time()+60*60*24*365, '/', 'localhost');
-            setcookie('token', $_GET['token'], time()+60*60*24*365, '/', 'localhost');
+$remember_me = $_GET['rememberme'];
 
-        } else {
-            /* Cookie expires when browser closes */
-            setcookie('SID', $_GET['SID'], false, '/', 'localhost');
-            setcookie('token', $_GET['token'], false, '/', 'localhost');
-        }
-        print_r ("Credentials saved!"); ?>
-<?
+$sid = $_POST['sid'];
+$token = $_POST['token'];
+
+if ($sid && $token) {
+    if ($remember_me) {
+        /* Set cookie to last 1 year */
+        setcookie('sid', $sid, 60 * 60 * 24 * 365);
+        setcookie('token', $token, 60 * 60 * 24 * 365);
+    } else {
+        /* Cookie expires when browser closes */
+        setcookie('sid', $sid, false);
+        setcookie('token', $token, false);
+    }
+
+    echo json_encode([
+        'status' => 'ok',
+        'payload' => [
+            'message' => 'Credentials saved!'
+        ]
+    ]);
+    exit;
 } else {
-    echo 'Oops, something went wrong.';
+    echo json_encode([
+        'status' => 'error',
+        'payload' => [
+            'message' => 'Oops, something went wrong.'
+        ]
+    ]);
+    exit;
 }
-echo "<br>";
-echo "SID is: " . $_GET["SID"];
-echo "<br>";
-echo "Token is: " . $_GET["token"];
-?>
