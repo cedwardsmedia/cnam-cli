@@ -6,9 +6,17 @@ require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 // Account SID
-$SID="AC2877277cd21a44af8e9344c53bb13119";
+if (isset($_COOKIE['SID'])) {
+   $SID = $_COOKIE['SID'];
+} else {
+   $SID="";
+}
 // AUTH Token
-$TOKEN="AUe03f0c1796c04eed8d838061895b4534";
+if (isset($_COOKIE['token'])) {
+   $TOKEN= $_COOKIE['token'];
+} else {
+   $TOKEN="";
+}
 
 function init() {
 
@@ -21,17 +29,25 @@ function apicall($SID, $TOKEN, $phone) {
        'timeout'  => 4.0,
     ]);
 
-    $response = $client->get("https://api.everyoneapi.com/v1/phone/$phone?account_sid=$SID&auth_token=$TOKEN&pretty=true");
-    $code = $response->getStatusCode();
-    $reason = $response->getReasonPhrase();
-
-    if ($code != 200) {
-      echo $code;
-      echo $reason;
-      die();
-   } else {
-      return $response->getBody();
+    try {
+      $response = $client->get("https://api.everyoneapi.com/v1/phone/$phone?account_sid=$SID&auth_token=$TOKEN&pretty=true");
+      $code = $response->getStatusCode();
+      $reason = $response->getReasonPhrase();
    }
+
+
+    catch(Exception $exception) {
+      if ($exception->getMessage() == "Client error: 400") {
+         echo "Bad request, doofus. Did you enter a real phone number?";
+      } elseif ($exception->getMessage() == "Client error: 401") {
+         echo "You need to login, doofus. Did you set your credentials?";
+      } else {
+         echo $exception->getMessage();
+      }
+      die();
+    }
+
+    return $response->getBody();
 
 }
 
@@ -65,7 +81,6 @@ $data = apicall($SID, $TOKEN, $phone);
 parse($data);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -122,33 +137,40 @@ parse($data);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript">
-      function Set_Cookie( name, value, expires, path, domain, secure ) {
-         // set time, it's in milliseconds
-         var today = new Date();
-         today.setTime( today.getTime() );
+   <script language="javascript" type="text/javascript">
 
-         /*
-         if the expires variable is set, make the correct
-         expires time, the current script below will set
-         it for x number of days, to make it for hours,
-         delete * 24, for minutes, delete * 60 * 24
-         */
-         if ( expires )
-            {
-            expires = expires * 1000 * 60 * 60 * 24;
-            }
-         var expires_date = new Date( today.getTime() + (expires) );
+   function saveCreds(){
+   var ajaxRequest;
 
-         document.cookie = name + "=" +escape( value ) +
-         ( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) +
-         ( ( path ) ? ";path=" + path : "" ) +
-         ( ( domain ) ? ";domain=" + domain : "" ) +
-         ( ( secure ) ? ";secure" : "" );
+      try{
+      // Opera 8.0+, Firefox, Safari
+      ajaxRequest = new XMLHttpRequest();
+      } catch (e){
+      // Internet Explorer Browsers
+      try{
+      	ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         	try{
+         		ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+         	} catch (e){
+         		// Something went wrong
+         		alert("Your browser broke!");
+         		return false;
+         	}
+         }
       }
-    </script>
-
-    </script>
+      // Create a function that will receive data sent from the server
+      ajaxRequest.onreadystatechange = function(){
+         if(ajaxRequest.readyState == 4){
+         	document.getElementById('CredentialsStatus').innerHTML = ajaxRequest.responseText;
+         }
+      }
+      var sid = (document.getElementById("SID")).value;
+      var token = (document.getElementById("token")).value;
+      var params = "sid=" + sid +"&token=" + token;
+      ajaxRequest.open("GET", "save.php?" + params, true);
+   };
+   </script>
   </head>
 
   <body>
@@ -181,7 +203,7 @@ parse($data);
    </div>
 
 <? if (!isset($data)) { ?>
-      <div class="cnam-header" id="content" tabindex="-1">
+      <div class="cnam-header hero" id="content" tabindex="-1">
             <div class="container">
                <h1>
                   <span style="background-color: transparent;
@@ -204,12 +226,11 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 
             </div>
       </div>
-<? }; ?>
+<? };?>
       <div class="container">
       <div class="row marketing">
         <div class="col-lg-12">
 
-<? if (isset($data)) { ?>
          <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             <strong>Hey you!</strong><br />
@@ -277,7 +298,6 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                </div>
             </form>
             </div>
-<? }; ?>
         </div>
       </div>
    </div> <!-- /container -->
@@ -298,24 +318,25 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
               <h4 class="modal-title" id="settingsLabel">EveryoneAPI Credentials</h4>
             </div>
             <div class="modal-body">
-               <form class="form-horizontal" >
+               <form class="form-horizontal" id="Credentials" action="saveCreds();" method="POST">
                   <div class="form-group">
-                     <label for="inputSID" class="col-sm-2 control-label">SID</label>
+                     <span id="CredentialsStatus"></span>
+                     <label for="SID" class="col-sm-2 control-label">SID</label>
                      <div class="col-sm-10">
-                     <input type="text" class="form-control" id="inputSID" placeholder="EveryoneAPI SID">
+                     <input type="text" class="form-control" id="SID" placeholder="EveryoneAPI SID" value="<? echo $SID; ?>" name="SID">
                      </div>
                      </div>
                      <div class="form-group">
-                     <label for="inputToken" class="col-sm-2 control-label">Password</label>
+                     <label for="token" class="col-sm-2 control-label">Password</label>
                      <div class="col-sm-10">
-                     <input type="password" class="form-control" id="inputToken" placeholder="EveryoneAPI API Token">
+                     <input type="password" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<? print_r(str_repeat("*",strlen($TOKEN)));?>">
                      </div>
                      </div>
                      <div class="form-group">
                      <div class="col-sm-offset-2 col-sm-10">
                      <div class="checkbox">
                      <label>
-                     <input type="checkbox"> Remember me
+                     <input type="checkbox" name="rememberme"> Remember me
                      </label>
                      </div>
                      <br />
@@ -325,7 +346,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" onclick="saveCreds(); type="submut" value="submit">Save changes</button>
              </form>
             </div>
           </div>
@@ -362,9 +383,15 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/holder/2.7.1/holder.min.js"></script>
     <script>
+      console.log("SID: <? echo $SID;?>");
+      console.log("Token: <? echo $TOKEN;?>");
+    </script>
+    <? if (isset($data)) {?>
+    <script>
+      console.log("Query details:");
       console.log("This query cost <? echo $cost; ?>");
       console.log("Note: <? echo $results['note']; ?>")
-    </script>
+   </script> <?};?>
     <script src="https://cdn.cedwardsmedia.com/public/credits.js"></script>
   </body>
 </html>
