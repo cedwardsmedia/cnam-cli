@@ -1,5 +1,9 @@
 # CNAM v1.0β
 
+[![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam)
+![Version](https://img.shields.io/badge/version-1.0β-brightgreen.svg?style=flat-square)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
+
 ![alt text](https://cdn.cedwardsmedia.com/images/cnam/screenshot.png "CNAM Screenshot")
 
 _CNAM_ is a web-based reverse phone number lookup tool written in PHP and sourced by [EveryoneAPI](https://www.everyoneapi.com/). In order to use CNAM, you must have an [EveryoneAPI account](https://www.everyoneapi.com/sign-up)  with [available funds](https://www.everyoneapi.com/pricing).
