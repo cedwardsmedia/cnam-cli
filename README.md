@@ -1,7 +1,7 @@
-# CNAM v1.0β
+# CNAM v1.0
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam)
-![Version](https://img.shields.io/badge/version-1.0β-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 
 ![alt text](https://cdn.cedwardsmedia.com/images/cnam/screenshot.png "CNAM Screenshot")
@@ -35,7 +35,8 @@ For **public** use:
 
 ## History
 
- - [_Oct 23, 2015_]: **1.0β** Total restructure of code and first public release.
+ - [_Oct 25, 2015_]: **1.0** Ended βeta Testing - First Stable Release
+ - [_Oct 23, 2015_]: 1.0β Total restructure of code and first public release.
  - [_Oct 22, 2015_]: 0.2 Switched to exception catching for handling HTTP status codes.
  - [_Jul 2, 2015_]: 0.1 First working version produced.
  - [_Jun 8, 2015_]: Concept drafted.
