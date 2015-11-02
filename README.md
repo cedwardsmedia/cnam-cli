@@ -45,7 +45,11 @@ For **public** use:
 ## To-do:
 
 1. Add ability to save PDF copy of dossier
-2. Brainstorm more features?
+2. Add modal with checkboxes to select data to query
+3. Don't query *everything* by default - costs too much
+4. Add ability to export dossier as vCard
+5. Add ability to export dossier as CSV
+6. Brainstorm more features?
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))
