@@ -60,4 +60,4 @@ Optimization and Debugging: Brian Seymour ([@eBrian](http://bri.io))
 _CNAM_ is licensed under the **MIT License**. See LICENSE for more.
 
 ---
-**Disclaimer**: _CNAM_ is not endorsed by, sponsored by, or otherwise associated with EveryoneAPI or Telo USA, Inc.
+**Disclaimer**: _CNAM_ is not endorsed by, sponsored by, or otherwise associated with [OpenCNAM](http://www.opencnam.com), [EveryoneAPI](http://www.everyoneapi.com), or [Telo USA, Inc](http://www.telo.com).
