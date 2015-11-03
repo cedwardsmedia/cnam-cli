@@ -64,7 +64,9 @@
             $_SESSION['linetype']= $this->data->data->linetype;
             $_SESSION['image']= $this->data->data->image->large;
             $_SESSION['phone']= $phone;
-            
+            $_SESSION['city']= $this->data->data->location->city;
+            $_SESSION['state']= $this->data->data->location->state;
+            $_SESSION['zip']= $this->data->data->location->zip;
             return $this->data;
         }
 
