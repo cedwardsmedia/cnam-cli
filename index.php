@@ -61,6 +61,7 @@
             // Populate $_SESSION with results
             $_SESSION['firstname']= $this->data->data->expanded_name->first;
             $_SESSION['lastname']= $this->data->data->expanded_name->last;
+            $_SESSION['gender']= $this->data->data->gender;
             $_SESSION['linetype']= $this->data->data->linetype;
             $_SESSION['image']= $this->data->data->image->large;
             $_SESSION['phone']= $phone;
