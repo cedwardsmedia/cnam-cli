@@ -16,7 +16,9 @@ PRODID:-//Corey Edwards//CNAM//EN
 N:<?php print_r($_SESSION['lastname']); ?>;<?php print_r($_SESSION['firstname']); ?>;;<?php if ($_SESSION['gender'] == "M") {echo "Mr.";} else {echo "Ms.";}; echo ";\n";?>
 FN:<?php print_r($_SESSION["firstname"]); ?> <?php print_r($_SESSION["lastname"]); ?>
 
-PHOTO;TYPE=JPEG:http:<?php echo $_SESSION['image']; ?>
+<?php if ($_SESSION['image']) { ?>
+PHOTO;TYPE=JPEG:http:<?php echo $_SESSION['image'];
+}; ?>
 
 TEL;TYPE=<?php if ($_SESSION['linetype'] == "mobile") { echo "CELL"; } else { echo "HOME";}; ?>,type=VOICE;type=pref:+1<?php echo $_SESSION['phone']; ?>
 
