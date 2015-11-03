@@ -1,7 +1,7 @@
-# CNAM v1.0
+# CNAM v1.1
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam)
-![Version](https://img.shields.io/badge/version-1.0-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -36,7 +36,8 @@ For **public** use:
 
 ## History
 
- - [_Oct 25, 2015_]: **1.0** Ended βeta Testing - First Stable Release
+ - **[_Nov 2, 2015_]: 1.1 Added ability to export dossier in vCard format**
+ - [_Oct 25, 2015_]: 1.0 Ended βeta Testing - First Stable Release
  - [_Oct 23, 2015_]: 1.0β Total restructure of code and first public release.
  - [_Oct 22, 2015_]: 0.2 Switched to exception catching for handling HTTP status codes.
  - [_Jul 2, 2015_]: 0.1 First working version produced.
@@ -47,9 +48,13 @@ For **public** use:
 1. Add ability to save PDF copy of dossier
 2. Add modal with checkboxes to select data to query
 3. Don't query *everything* by default - costs too much
-4. Add ability to export dossier as vCard
-5. Add ability to export dossier as CSV
-6. Brainstorm more features?
+4. Add ability to export dossier as CSV
+5. Brainstorm more features?
+
+## Known Issues:
+
+1. Apple Contacts, Google Contacts, and others do not import avatar from exported vCard. This is an issue with the way these products parse vCard documents and is NOT a bug in CNAM. However, in the interest of interoperability, I will add base64 encoded images to the vCard format in a future release.
+2. There is currently no way to select specific fields to return in the query. As such, all current queries request all available data from EveryoneAPI. This will be added in an upcoming release.
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))

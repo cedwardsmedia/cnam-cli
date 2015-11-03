@@ -1,4 +1,7 @@
 <?php
+    // Start the session so we can save
+    // query results across pages requests.
+    session_start();
 
     ini_set('display_errors', 0);
     error_reporting(E_ALL & ~E_NOTICE);
@@ -25,6 +28,9 @@
         }
 
         public function api_call($phone) {
+
+            session_unset(); // Reset session variables for new query
+
             $phone = preg_replace('/[^0-9,.\+]/', '', $phone);
 
             if (!preg_match('/^(\+1)?[0-9]{10}$/', $phone)) {
@@ -52,6 +58,16 @@
 
             $this->data = json_decode($response->getBody());
 
+            // Populate $_SESSION with results
+            $_SESSION['firstname']= $this->data->data->expanded_name->first;
+            $_SESSION['lastname']= $this->data->data->expanded_name->last;
+            $_SESSION['gender']= $this->data->data->gender;
+            $_SESSION['linetype']= $this->data->data->linetype;
+            $_SESSION['image']= $this->data->data->image->large;
+            $_SESSION['phone']= $phone;
+            $_SESSION['city']= $this->data->data->location->city;
+            $_SESSION['state']= $this->data->data->location->state;
+            $_SESSION['zip']= $this->data->data->location->zip;
             return $this->data;
         }
 
@@ -214,9 +230,10 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button type="button" class="btn btn-default pull-right" onclick="window.print()">
+                    <button type="button" class="btn btn-default pull-right tools" onclick="window.print()">
                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                     </button>
+                    <a href="vcard.php"><button class="btn btn-default pull-right tools"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></button></a>
                     <h4>
                         Dossier for
                         <b>
