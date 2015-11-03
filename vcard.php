@@ -1,6 +1,6 @@
 <?php
    session_start();
-   header("Content-Type: text/vcard");
+   header("Content-Type: text/vcard; charset=utf-8");
    header('Content-Disposition: attachment; filename="' . $_SESSION['lastname'] . '.vcf');
 ?>
 BEGIN:VCARD
