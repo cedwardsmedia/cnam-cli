@@ -30,7 +30,7 @@
         public function api_call($phone) {
 
             session_unset(); // Reset session variables for new query
-            
+
             $phone = preg_replace('/[^0-9,.\+]/', '', $phone);
 
             if (!preg_match('/^(\+1)?[0-9]{10}$/', $phone)) {
@@ -58,6 +58,10 @@
 
             $this->data = json_decode($response->getBody());
 
+            // Populate $_SESSION with results
+            $_SESSION['firstname']= $this->data->data->expanded_name->first;
+            $_SESSION['lastname']= $this->data->data->expanded_name->last;
+            
             return $this->data;
         }
 
