@@ -1,4 +1,7 @@
 <?php
+    // Start the session so we can save
+    // query results across pages requests.
+    session_start();
 
     ini_set('display_errors', 0);
     error_reporting(E_ALL & ~E_NOTICE);
@@ -25,6 +28,9 @@
         }
 
         public function api_call($phone) {
+
+            session_unset(); // Reset session variables for new query
+            
             $phone = preg_replace('/[^0-9,.\+]/', '', $phone);
 
             if (!preg_match('/^(\+1)?[0-9]{10}$/', $phone)) {
