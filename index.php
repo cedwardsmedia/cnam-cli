@@ -230,10 +230,10 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button type="button" class="btn btn-default pull-right" onclick="window.print()">
+                    <button type="button" class="btn btn-default pull-right tools" onclick="window.print()">
                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                     </button>
-                    <a href="vcard.php"><button class="btn btn-default pull-right"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></button></a>
+                    <a href="vcard.php"><button class="btn btn-default pull-right tools"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></button></a>
                     <h4>
                         Dossier for
                         <b>
