@@ -22,7 +22,7 @@ if ($sid && $token) {
     echo json_encode([
         'status' => 'ok',
         'payload' => [
-            'message' => 'Credentials saved!'
+            'message' => '<i class="fa fa-check-circle"></i> Credentials saved!'
         ]
     ]);
     exit;
@@ -30,7 +30,7 @@ if ($sid && $token) {
     echo json_encode([
         'status' => 'error',
         'payload' => [
-            'message' => 'Oops, something went wrong.'
+            'message' => '<i class="fa fa-warning"></i> Oops, something went wrong.'
         ]
     ]);
     exit;

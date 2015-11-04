@@ -1,105 +1,5 @@
 <?php
-    // Start the session so we can save
-    // query results across pages requests.
-    session_start();
-
-    ini_set('display_errors', 0);
-    error_reporting(E_ALL & ~E_NOTICE);
-
-    require 'vendor/autoload.php';
-
-    class ApiCaller {
-
-        public $http;
-        public $error;
-
-        public $sid;
-        public $token;
-
-        public $data;
-
-        public $cost;
-
-        function __construct() {
-            $this->client = new \GuzzleHttp\Client();
-
-            $this->sid   = $_COOKIE['sid']   ? $_COOKIE['sid']   : '';
-            $this->token = $_COOKIE['token'] ? $_COOKIE['token'] : '';
-        }
-
-        public function api_call($phone) {
-
-            session_unset(); // Reset session variables for new query
-
-            $phone = preg_replace('/[^0-9,.\+]/', '', $phone);
-
-            if (!preg_match('/^(\+1)?[0-9]{10}$/', $phone)) {
-                $this->error = 'Phone not in the proper format';
-                return null;
-            }
-
-            try {
-                $response = $this->client
-                    ->get("https://api.everyoneapi.com/v1/phone/$phone?".
-                        "account_sid={$this->sid}&".
-                        "auth_token={$this->token}&".
-                        "pretty=true");
-            } catch (\Exception $exception) {
-                if ($exception->getMessage() == 'Client error: 400') {
-                    $this->error = 'Bad request, doofus. Did you enter a real phone number?';
-                } elseif ($exception->getMessage() == 'Client error: 401') {
-                    $this->error = 'You need to login, doofus. Did you set your credentials?';
-                } else {
-                    $this->error = 'An unknown error occurred';
-                }
-
-                return null;
-            }
-
-            $this->data = json_decode($response->getBody());
-
-            // Populate $_SESSION with results
-            $_SESSION['firstname']= $this->data->data->expanded_name->first;
-            $_SESSION['lastname']= $this->data->data->expanded_name->last;
-            $_SESSION['gender']= $this->data->data->gender;
-            $_SESSION['linetype']= $this->data->data->linetype;
-            $_SESSION['image']= $this->data->data->image->large;
-            $_SESSION['phone']= $phone;
-            $_SESSION['city']= $this->data->data->location->city;
-            $_SESSION['state']= $this->data->data->location->state;
-            $_SESSION['zip']= $this->data->data->location->zip;
-            return $this->data;
-        }
-
-        public function get_cost() {
-            $this->cost = '$' . abs($this->data->pricing->total);
-
-            return $this->cost;
-        }
-
-        public function get_title() {
-            $title = '';
-
-            if ($this->data) {
-                $title = 'Dossier for ';
-                if ($this->data->number) {
-                    $title .= $this->data->number;
-                } else {
-                    $title .= $this->data->data->expanded_name->first . ' ' . $this->data->data->expanded_name->last;
-                }
-                $title .= ' provided by CNAM';
-            } else {
-                $title .= 'Reverse Phone Lookup powered by EveryoneAPI';
-            }
-
-            return $title;
-        }
-
-    }
-
-    $api = new ApiCaller();
-    $_POST['phone'] && $api->api_call($_POST['phone']);
-
+   require("bootstrap.inc.php");
 ?>
 
 <!DOCTYPE html>
@@ -108,25 +8,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
+
+    <meta name="description" content=" Web-based reverse phone number lookup tool written in PHP and sourced by EveryoneAPI.">
     <meta name="author" content="Corey Edwards">
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="assets/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
 
@@ -134,16 +34,7 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-    <!-- Custom styles for this template -->
-    <link href="main.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="assets/css/main.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -156,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">CNAM</a>
+                <a class="navbar-brand" href="/"><?php echo APPNAME;?></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -164,9 +55,9 @@
                     <li><a href="#" data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-lg"></i> </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://www.twitter.com/cedwardsmedia" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
-                    <li><a href="https://www.facebook.com/cedwardsmedia" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
-                    <li><a href="https://www.github.com/cedwardsmedia" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
+                    <li><a href="<?php echo $TWITTER;?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li><a href="<?php echo $FACEBOOK;?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href="<?php echo $GITHUB;?>" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -282,7 +173,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                         <label class="sr-only" for="Phone Number">Phone Number</label>
                         <div class="input-group input-group-lg">
                             <div class="input-group-addon">+1</div>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone Number">
+                            <input type="text" name="phone" class="form-control" id="phone" placeholder="<?php echo $_POST['phone'];?>">
                            <span class="input-group-btn">
                               <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                            </span>
@@ -296,113 +187,97 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 <?php }; ?>
 <footer class="footer">
     <div class="container">
-        <p><span class="pull-left">&copy; Corey Edwards 2015</span>
+         <p>
+            <span class="pull-left"><a href="<?php echo DEVGITHUB;?>">Original code</a> <?php echo COPYRIGHT;?> </span>
 
-            <span class="text-muted pull-right">powered by <a href="https://www.everyoneapi.com/" target="_blank">EveryoneAPI</a></span></p>
+            <span class="text-muted pull-right">powered by <a href="https://www.everyoneapi.com/" target="_blank">EveryoneAPI</a></span>
+         </p>
     </div>
 </footer>
 
-<!-- Modal -->
-<script>
-    var save_creds = function() {
-        $.post('/auth.php',
-            {
-                sid: $('#sid').val(),
-                token: $('#token').val()
-            }, function(data) {
-                if (data.status === 'error') {
-                    $('#CredentialsStatus')
-                        .removeClass('alert-success')
-                        .addClass('alert-danger')
-                        .show()
-                        .html(data.payload.message);
-                } else {
-                    $('#CredentialsStatus')
-                        .removeClass('alert-danger')
-                        .addClass('alert-success')
-                        .show()
-                        .html(data.payload.message);
-                }
-            },
-            'json'
-        );
-    };
-</script>
-<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="settingsLabel">EveryoneAPI Credentials</h4>
-            </div>
-            <div class="modal-body">
-                <div id="CredentialsStatus" class="alert alert-danger well-sm" style="display: none;"></div>
+   <!-- Credentials Modal -->
+   <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title" id="settingsLabel">EveryoneAPI Credentials</h4>
+               </div>
+               <div class="modal-body">
+                   <div id="CredentialsStatus" class="alert alert-danger well-sm" style="display: none;"></div>
 
-                <div class="form-group" style="margin-top: 20px;">
-                    <div class="row">
-                        <label for="SID" class="col-sm-2 control-label">SID</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="sid" placeholder="EveryoneAPI SID" value="<?php echo $api->sid; ?>" name="SID">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="token" class="col-sm-2 control-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r(str_repeat("*",strlen($api->token))); ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="rememberme"> Remember me
-                                </label>
-                            </div>
-                            <br />
-                            <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via CNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="save_creds();">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+                   <div class="form-group" style="margin-top: 20px;">
+                       <div class="row">
+                           <label for="SID" class="col-sm-2 control-label">SID</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="sid" placeholder="EveryoneAPI SID" value="<?php echo $api->sid; ?>" name="SID">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="row">
+                           <label for="token" class="col-sm-2 control-label">Token</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r($api->token); ?>">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="row">
+                           <div class="col-sm-offset-2 col-sm-10">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" name="rememberme"> Remember me
+                                   </label>
+                               </div>
+                               <br />
+                               <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via <?php echo APPNAME;?>. However, your credentials are <strong>never stored</strong> on the server.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   <button type="button" class="btn btn-primary" onclick="save_creds();">Save changes</button>
+               </div>
+           </div>
+       </div>
+   </div><!-- /Credentials Modal -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="aboutLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="settingsLabel">CNAM v1.0&#946;</h4>
-            </div>
-            <div class="modal-body">
-                <div class="codelove text-center">
-                   <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
-                </div>
-                <hr>
-                <p class="text-muted text-center">CNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
 
+   <!-- About Modal -->
+   <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="aboutLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title" id="settingsLabel"><?php echo APPNAME;?> v<?php echo VERSION;?></h4>
+               </div>
+               <div class="modal-body">
+                   <div class="codelove text-center">
+                      <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
+                   </div>
+                   <hr>
+                   <p class="text-muted text-center"><?php echo APPNAME;?> is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
+                   <div class="modal-footer">
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div><!-- /About Modal -->
 
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="assets/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/holder/2.7.1/holder.min.js"></script>
     <script src="https://cdn.cedwardsmedia.com/public/credits.js"></script>
-</body>
+   </body>
 </html>
