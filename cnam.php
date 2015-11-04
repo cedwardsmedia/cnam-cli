@@ -6,7 +6,7 @@ require("bootstrap.inc.php");
 ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
-//print_r($_SERVER['argv']); exit();
+//echo($_SERVER['argv']); exit();
 
    // Process our arguments and flags
    //$ARGS = ; // Get CLI arguments and flags
@@ -19,7 +19,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       if (in_array("--help", $ARGS) OR in_array("-h", $ARGS)){
             help();
          } else {
-            //print_r($ARGS[1]); die();
+            //echo($ARGS[1]); die();
             $phone = $ARGS[1];
             $api = new APICaller();
             $api->api_call($phone);
@@ -29,20 +29,20 @@ error_reporting(E_ALL & ~E_NOTICE);
 
             // Print any error and die
             if ($api->error) {
-               print_r("Error: $api->error\n");
+               echo("Error: $api->error\n");
                exit(2);
             } else {
 
             // Print Dossier
                hr();
-               print_r($api->data->data->cnam . "\n");
+               echo($api->data->data->cnam . "\n");
                hr();
                // Print Name
                if ($api->data->data->gender == "M"){$salutation = "Mr.";} elseif ($api->data->data->gender == "F"){$salutation = "Ms.";};
-               print_r("Name:\n   " . $salutation ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n");
+               echo("Name:\n   " . $salutation ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n");
 
                // Print Address
-               print_r("Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n");
+               echo("Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n");
 
                // Print Gender
                echo("Gender: ");
@@ -50,25 +50,25 @@ error_reporting(E_ALL & ~E_NOTICE);
                echo "\n\n";
 
                // Print Relationship
-               print_r("Relationship:\n   " . $api->data->data->profile->relationship . "\n\n");
+               echo("Relationship:\n   " . $api->data->data->profile->relationship . "\n\n");
 
                // Print Image
-               print_r("Image:\n   http:" . $api->data->data->image->large . "\n\n");
+               echo("Image:\n   http:" . $api->data->data->image->large . "\n\n");
 
                // Print Job
-               print_r("Job:\n   " . $api->data->data->profile->job . "\n\n");
+               echo("Job:\n   " . $api->data->data->profile->job . "\n\n");
 
                // Print Education
-               print_r("Edu:\n   " . $api->data->data->profile->edu . "\n\n");
+               echo("Edu:\n   " . $api->data->data->profile->edu . "\n\n");
 
                // Print Linetype
-               print_r("Linetype:\n   " . $api->data->data->linetype . "\n\n");
+               echo("Linetype:\n   " . $api->data->data->linetype . "\n\n");
 
                // Print Original Carrier
-               print_r("Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n");
+               echo("Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n");
 
                // Print Current Carrier
-               print_r("Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n");
+               echo("Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n");
 
                hr();
             }
@@ -87,7 +87,7 @@ function hr() {
    echo "\n";
 }
 function usage() {
-   print_r("Usage: cnam [OPTIONS]... [PHONE NUMBER]...\n\nTry 'cnam  --help' for more options.\n");
+   echo("Usage: cnam [OPTIONS]... [PHONE NUMBER]...\n\nTry 'cnam  --help' for more options.\n");
    exit(0);
 }
 
@@ -99,7 +99,7 @@ function help() {
 
 // Print Debug Info
 function debug() {
-   print_r("\n------------------------------------\n");
-   print_r($ARGS);
+   echo("\n------------------------------------\n");
+   echo($ARGS);
    exit(0);
 }
