@@ -1,15 +1,5 @@
 <?php
-   // Start the session so we can save
-   // query results across pages requests.
-   session_start();
-
-   ini_set('display_errors', 0);
-   error_reporting(E_ALL & ~E_NOTICE);
-
-   require 'vendor/autoload.php';
-
-   require("functions.inc.php");
-
+   require("bootstrap.inc.php");
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">CNAM</a>
+                <a class="navbar-brand" href="/"><?php echo APPNAME;?></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -67,7 +57,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="https://www.twitter.com/cedwardsmedia" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
                     <li><a href="https://www.facebook.com/cedwardsmedia" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
-                    <li><a href="https://www.github.com/cedwardsmedia" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
+                    <li><a href="<?php echo GITHUB;?>" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -183,7 +173,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                         <label class="sr-only" for="Phone Number">Phone Number</label>
                         <div class="input-group input-group-lg">
                             <div class="input-group-addon">+1</div>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone Number">
+                            <input type="text" name="phone" class="form-control" id="phone" placeholder="<?php echo $_POST['phone'];?>">
                            <span class="input-group-btn">
                               <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                            </span>
@@ -241,7 +231,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                                    </label>
                                </div>
                                <br />
-                               <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via CNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
+                               <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via <?php echo APPNAME;?>. However, your credentials are <strong>never stored</strong> on the server.</p>
                            </div>
                        </div>
                    </div>
@@ -262,14 +252,14 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
            <div class="modal-content">
                <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                   <h4 class="modal-title" id="settingsLabel">CNAM v1.0&#946;</h4>
+                   <h4 class="modal-title" id="settingsLabel"><?php echo APPNAME;?> v<?php echo VERSION;?></h4>
                </div>
                <div class="modal-body">
                    <div class="codelove text-center">
                       <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
                    </div>
                    <hr>
-                   <p class="text-muted text-center">CNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
+                   <p class="text-muted text-center"><?php echo APPNAME;?> is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
                    <div class="modal-footer">
                    </div>
                </div>
