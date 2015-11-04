@@ -216,9 +216,9 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                    </div>
                    <div class="form-group">
                        <div class="row">
-                           <label for="token" class="col-sm-2 control-label">Password</label>
+                           <label for="token" class="col-sm-2 control-label">Token</label>
                            <div class="col-sm-10">
-                               <input type="password" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r(str_repeat("*",strlen($api->token))); ?>">
+                               <input type="text" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r($api->token); ?>">
                            </div>
                        </div>
                    </div>
