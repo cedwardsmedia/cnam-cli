@@ -1,104 +1,14 @@
 <?php
-    // Start the session so we can save
-    // query results across pages requests.
-    session_start();
+   // Start the session so we can save
+   // query results across pages requests.
+   session_start();
 
-    ini_set('display_errors', 0);
-    error_reporting(E_ALL & ~E_NOTICE);
+   ini_set('display_errors', 0);
+   error_reporting(E_ALL & ~E_NOTICE);
 
-    require 'vendor/autoload.php';
+   require 'vendor/autoload.php';
 
-    class ApiCaller {
-
-        public $http;
-        public $error;
-
-        public $sid;
-        public $token;
-
-        public $data;
-
-        public $cost;
-
-        function __construct() {
-            $this->client = new \GuzzleHttp\Client();
-
-            $this->sid   = $_COOKIE['sid']   ? $_COOKIE['sid']   : '';
-            $this->token = $_COOKIE['token'] ? $_COOKIE['token'] : '';
-        }
-
-        public function api_call($phone) {
-
-            session_unset(); // Reset session variables for new query
-
-            $phone = preg_replace('/[^0-9,.\+]/', '', $phone);
-
-            if (!preg_match('/^(\+1)?[0-9]{10}$/', $phone)) {
-                $this->error = 'Phone not in the proper format';
-                return null;
-            }
-
-            try {
-                $response = $this->client
-                    ->get("https://api.everyoneapi.com/v1/phone/$phone?".
-                        "account_sid={$this->sid}&".
-                        "auth_token={$this->token}&".
-                        "pretty=true");
-            } catch (\Exception $exception) {
-                if ($exception->getMessage() == 'Client error: 400') {
-                    $this->error = 'Bad request, doofus. Did you enter a real phone number?';
-                } elseif ($exception->getMessage() == 'Client error: 401') {
-                    $this->error = 'You need to login, doofus. Did you set your credentials?';
-                } else {
-                    $this->error = 'An unknown error occurred';
-                }
-
-                return null;
-            }
-
-            $this->data = json_decode($response->getBody());
-
-            // Populate $_SESSION with results
-            $_SESSION['firstname']= $this->data->data->expanded_name->first;
-            $_SESSION['lastname']= $this->data->data->expanded_name->last;
-            $_SESSION['gender']= $this->data->data->gender;
-            $_SESSION['linetype']= $this->data->data->linetype;
-            $_SESSION['image']= $this->data->data->image->large;
-            $_SESSION['phone']= $phone;
-            $_SESSION['city']= $this->data->data->location->city;
-            $_SESSION['state']= $this->data->data->location->state;
-            $_SESSION['zip']= $this->data->data->location->zip;
-            return $this->data;
-        }
-
-        public function get_cost() {
-            $this->cost = '$' . abs($this->data->pricing->total);
-
-            return $this->cost;
-        }
-
-        public function get_title() {
-            $title = '';
-
-            if ($this->data) {
-                $title = 'Dossier for ';
-                if ($this->data->number) {
-                    $title .= $this->data->number;
-                } else {
-                    $title .= $this->data->data->expanded_name->first . ' ' . $this->data->data->expanded_name->last;
-                }
-                $title .= ' provided by CNAM';
-            } else {
-                $title .= 'Reverse Phone Lookup powered by EveryoneAPI';
-            }
-
-            return $title;
-        }
-
-    }
-
-    $api = new ApiCaller();
-    $_POST['phone'] && $api->api_call($_POST['phone']);
+   require("functions.inc.php");
 
 ?>
 
@@ -287,83 +197,86 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 <?php }; ?>
 <footer class="footer">
     <div class="container">
-        <p><span class="pull-left">&copy; Corey Edwards 2015</span>
+         <p>
+            <span class="pull-left">&copy; Corey Edwards 2015</span>
 
-            <span class="text-muted pull-right">powered by <a href="https://www.everyoneapi.com/" target="_blank">EveryoneAPI</a></span></p>
+            <span class="text-muted pull-right">powered by <a href="https://www.everyoneapi.com/" target="_blank">EveryoneAPI</a></span>
+         </p>
     </div>
 </footer>
 
-<!-- Modal -->
-<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="settingsLabel">EveryoneAPI Credentials</h4>
-            </div>
-            <div class="modal-body">
-                <div id="CredentialsStatus" class="alert alert-danger well-sm" style="display: none;"></div>
+   <!-- Credentials Modal -->
+   <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title" id="settingsLabel">EveryoneAPI Credentials</h4>
+               </div>
+               <div class="modal-body">
+                   <div id="CredentialsStatus" class="alert alert-danger well-sm" style="display: none;"></div>
 
-                <div class="form-group" style="margin-top: 20px;">
-                    <div class="row">
-                        <label for="SID" class="col-sm-2 control-label">SID</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="sid" placeholder="EveryoneAPI SID" value="<?php echo $api->sid; ?>" name="SID">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="token" class="col-sm-2 control-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r(str_repeat("*",strlen($api->token))); ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="rememberme"> Remember me
-                                </label>
-                            </div>
-                            <br />
-                            <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via CNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="save_creds();">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="aboutLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="settingsLabel">CNAM v1.0&#946;</h4>
-            </div>
-            <div class="modal-body">
-                <div class="codelove text-center">
-                   <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
-                </div>
-                <hr>
-                <p class="text-muted text-center">CNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
+                   <div class="form-group" style="margin-top: 20px;">
+                       <div class="row">
+                           <label for="SID" class="col-sm-2 control-label">SID</label>
+                           <div class="col-sm-10">
+                               <input type="text" class="form-control" id="sid" placeholder="EveryoneAPI SID" value="<?php echo $api->sid; ?>" name="SID">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="row">
+                           <label for="token" class="col-sm-2 control-label">Password</label>
+                           <div class="col-sm-10">
+                               <input type="password" class="form-control" id="token" placeholder="EveryoneAPI API" name="token" value="<?php print_r(str_repeat("*",strlen($api->token))); ?>">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="row">
+                           <div class="col-sm-offset-2 col-sm-10">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" name="rememberme"> Remember me
+                                   </label>
+                               </div>
+                               <br />
+                               <p class="text-muted">Your credentials will be saved to your browser using a cookie. They <strong>will</strong> be transmitted to the server with every request you make via CNAM. However, your credentials are <strong>never stored</strong> on the server.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   <button type="button" class="btn btn-primary" onclick="save_creds();">Save changes</button>
+               </div>
+           </div>
+       </div>
+   </div><!-- /Credentials Modal -->
 
 
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
+
+   <!-- About Modal -->
+   <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="aboutLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title" id="settingsLabel">CNAM v1.0&#946;</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="codelove text-center">
+                      <i class="fa fa-code"></i> <i class="fa fa-plus text-math"></i> <i class="fa fa-heart"></i> <i class="fa fa-times text-math"></i> <a href="https://www.cedwardsmedia.com"><img src="https://avatars0.githubusercontent.com/u/1514767?v=3&s=48" alt="Corey Edwards"></a> <i class="fa fa-plus text-math"></i> <a href="https://bri.io/"><img src="https://avatars2.githubusercontent.com/u/4989650?v=3&s=48" alt="Brian Seymour"></a>
+                   </div>
+                   <hr>
+                   <p class="text-muted text-center">CNAM is an independent project and is not affiliated with or endorsed by EveryoneAPI.</p>
+                   <div class="modal-footer">
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div><!-- /About Modal -->
+
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -376,5 +289,5 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/holder/2.7.1/holder.min.js"></script>
     <script src="https://cdn.cedwardsmedia.com/public/credits.js"></script>
-</body>
+   </body>
 </html>
