@@ -188,7 +188,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
 <footer class="footer">
     <div class="container">
          <p>
-            <span class="pull-left">&copy; Corey Edwards 2015</span>
+            <span class="pull-left"><a href="<?php echo DEVGITHUB;?>">Original code</a> <?php echo COPYRIGHT;?> </span>
 
             <span class="text-muted pull-right">powered by <a href="https://www.everyoneapi.com/" target="_blank">EveryoneAPI</a></span>
          </p>
