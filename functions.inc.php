@@ -12,10 +12,26 @@ class ApiCaller {
    public $cost; // Query Cost
 
    function __construct() {
+
+
      $this->client = new \GuzzleHttp\Client();
 
+     // Check config for credentials first. If they aren't set, then set them from the cookie. If neither is set, these vars will be null.
+     include 'config.php';
+
+     // Check for $SID first
+     if ($SID) {
+        $this->sid = $SID;
+     } else {
      $this->sid   = $_COOKIE['sid']   ? $_COOKIE['sid']   : '';
+     }
+
+     // Check for $TOKEN
+     if ($TOKEN) {
+        $this->token = $TOKEN;
+     } else {
      $this->token = $_COOKIE['token'] ? $_COOKIE['token'] : '';
+     }
    }
 
    public function api_call($phone) {
