@@ -97,7 +97,6 @@
 
     }
 
-    // test: 5551234567
     $api = new ApiCaller();
     $_POST['phone'] && $api->api_call($_POST['phone']);
 
@@ -188,7 +187,7 @@ border: 1px solid #CDBFE3; width: 144px; height: 144px; font-size: 108px; line-h
                     <label class="sr-only" for="Phone Number">Phone Number</label>
                     <div class="input-group input-group-lg">
                         <div class="input-group-addon">+1</div>
-                        <input type="tel" name="phone" class="form-control" id="phone" placeholder="Phone Number" title="A ten digit USA or CAN phone number." value="" required>
+                        <input type="tel" name="phone" class="form-control" id="phone" placeholder="5551234567" title="A ten digit USA or CAN phone number." value="" required>
                  <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                  </span>
