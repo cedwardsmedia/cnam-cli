@@ -1,5 +1,5 @@
 var save_creds = function() {
-    $.post('/auth.php',
+    $.post('/eapiauth.php',
         {
             sid: $('#sid').val(),
             token: $('#token').val()
