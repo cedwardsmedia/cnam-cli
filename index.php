@@ -55,9 +55,9 @@
                     <li><a href="#" data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-lg"></i> </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://www.twitter.com/cedwardsmedia" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
-                    <li><a href="https://www.facebook.com/cedwardsmedia" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
-                    <li><a href="<?php echo GITHUB;?>" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
+                    <li><a href="<?php echo $TWITTER;?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li><a href="<?php echo $FACEBOOK;?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href="<?php echo $GITHUB;?>" target="_blank"><i class="fa fa-github fa-lg"></i></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
