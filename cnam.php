@@ -25,52 +25,64 @@ error_reporting(E_ALL & ~E_NOTICE);
             $api->api_call($phone);
 
 
-            // Check for errors reported by API
+            /* Let's check for API errors. They'll be returned in
+            $api->error. So if this variable is set, let's print the error and exit */
 
-            // Print any error and die
-            if ($api->error) {
-               echo("Error: $api->error\n");
-               exit(2);
+            // Print the error and die
+            if ($api->error) { // If there's an error
+               echo("Error: $api->error\n"); // Print it out
+               exit(2); // Exit with status 2
             } else {
 
+            /* If no error exists, let's check if any information was returned from EveryoneAPI. If not, we'll print an error and exit. If so, we'll print the dossier. */
+
+            // Is the information available? If not, err and die
+               if ($api->cnam == "Unavailable") {
+                  echo("Error: Information for $phone is not available from EveryoneAPI.");
+                  exit(3);
+               } else {
+
+            // No API errors and we have results from the API
             // Print Dossier
-               hr();
-               echo($api->data->data->cnam . "\n");
-               hr();
-               // Print Name
-               if ($api->data->data->gender == "M"){$salutation = "Mr.";} elseif ($api->data->data->gender == "F"){$salutation = "Ms.";};
-               echo("Name:\n   " . $salutation ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n");
+                     hr(); // Print a line
+                     echo($api->data->data->cnam . "\n"); // Print the CNAM
+                     hr(); // Print a line
+            // Print Name
+                     // Pick the title based on gender
+                     if ($api->data->data->gender == "M"){$title = "Mr.";} elseif ($api->data->data->gender == "F"){$title = "Ms.";};
+                     echo("Name:\n   " . $title ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n");
 
-               // Print Address
-               echo("Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n");
+                     // Print Address
+                     echo("Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n");
 
-               // Print Gender
-               echo("Gender: ");
-               if ($api->data->data->gender == "M"){echo "Male";} elseif ($api->data->data->gender == "F"){echo "Female";};
-               echo "\n\n";
+                     // Print Gender
+                     echo("Gender: ");
+                     if ($api->data->data->gender == "M"){echo "Male";} elseif ($api->data->data->gender == "F"){echo "Female";};
+                     echo "\n\n";
 
-               // Print Relationship
-               echo("Relationship:\n   " . $api->data->data->profile->relationship . "\n\n");
+                     // Print Relationship
+                     echo("Relationship:\n   " . $api->data->data->profile->relationship . "\n\n");
 
-               // Print Image
-               echo("Image:\n   http:" . $api->data->data->image->large . "\n\n");
+                     // Print Image
+                     echo("Image:\n   http:" . $api->data->data->image->large . "\n\n");
 
-               // Print Job
-               echo("Job:\n   " . $api->data->data->profile->job . "\n\n");
+                     // Print Job
+                     echo("Job:\n   " . $api->data->data->profile->job . "\n\n");
 
-               // Print Education
-               echo("Edu:\n   " . $api->data->data->profile->edu . "\n\n");
+                     // Print Education
+                     echo("Edu:\n   " . $api->data->data->profile->edu . "\n\n");
 
-               // Print Linetype
-               echo("Linetype:\n   " . $api->data->data->linetype . "\n\n");
+                     // Print Linetype
+                     echo("Linetype:\n   " . $api->data->data->linetype . "\n\n");
 
-               // Print Original Carrier
-               echo("Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n");
+                     // Print Original Carrier
+                     echo("Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n");
 
-               // Print Current Carrier
-               echo("Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n");
+                     // Print Current Carrier
+                     echo("Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n");
 
-               hr();
+                     hr();
+               }
             }
       }
    } else {
