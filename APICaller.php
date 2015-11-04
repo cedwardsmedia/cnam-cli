@@ -1,5 +1,5 @@
 <?php
-class ApiCaller {
+class APICaller {
 
    public $http;
    public $error;
