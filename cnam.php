@@ -36,7 +36,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             // Print the error and die
             if ($api->error) { // If there's an error
                echo("Error: $api->error\n"); // Print it out
-               exit(2); // Exit with status 2
+               exit(1); // Exit with status 1
             } else {
 
             /* If no error exists, let's check if any information was returned from EveryoneAPI. If not, we'll print an error and exit. If so, we'll print the dossier. */
