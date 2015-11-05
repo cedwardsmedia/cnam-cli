@@ -13,7 +13,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 
    $ARGS = $_SERVER['argv'];
 
-   if ( $ARGS > 0 ) {
+   //print_r($ARGS); die();
+   if ( array_key_exists("1",$ARGS) ) {
 
       // Check for help flags.
       if (in_array("--help", $ARGS) OR in_array("-h", $ARGS)){
