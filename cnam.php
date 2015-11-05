@@ -109,7 +109,7 @@ function usage() {
 
 // Print version
 function version() {
-   echo APPNAME . " " . VERSION;
+   echo APPNAME . " " . VERSION . "\n";
    exit(0);
 }
 
