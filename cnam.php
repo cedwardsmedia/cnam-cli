@@ -44,7 +44,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             // Is the information available? If not, err and die
                if ($api->data->data->cnam == "Unavailable") {
                   echo("I'm sorry, but information for $phone is not available from EveryoneAPI.\n");
-                  exit(3);
+                  exit(0);
                } else {
 
             // No API errors and we have results from the API
