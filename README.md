@@ -1,7 +1,7 @@
-# CNAM v1.2
+# CNAM v1.3
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam)
-![Version](https://img.shields.io/badge/version-1.2-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.3-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -36,7 +36,8 @@ For **public** use:
 
 ## History
 
- - **[_Nov 3, 2015_]: 1.2 Cleaned up code and organized files**
+ - **[_Nov 4, 2015_]: 1.3 Added command line tool - cnam.php**
+ - [_Nov 3, 2015_]: 1.2 Cleaned up code and organized files
  - [_Nov 2, 2015_]: 1.1 Added ability to export dossier in vCard format
  - [_Oct 25, 2015_]: 1.0 Ended βeta Testing - First Stable Release
  - [_Oct 23, 2015_]: 1.0β Total restructure of code and first public release.
