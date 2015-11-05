@@ -105,7 +105,9 @@ function usage() {
 
 // Print Help
 function help() {
-   echo "Help goes here\n";
+   echo APPNAME . " " . VERSION . " by " . DEVELOPER . "\n";
+   echo "© " . COPYRIGHTYEAR . " All Rights Reserved.\n\n";
+   echo "Command-line client for EveryoneAPI.\nRun `cnam` without any arguments for usage information.\n";
    exit(0);
 }
 
