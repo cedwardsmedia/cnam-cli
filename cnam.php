@@ -93,6 +93,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       usage();
    };
 
+// Print horizontal line across terminal width
 function hr() {
    $width = shell_exec('/usr/bin/tput cols');
    $x = 0;
