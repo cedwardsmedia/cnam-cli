@@ -57,6 +57,8 @@ class APICaller {
              $this->error = 'You need to login, doofus. Did you set your credentials?';
          } elseif ($exception->getMessage() == 'Client error: 402') {
              $this->error = 'Hey doofus, EveryoneAPI isn\'t free! Time to top off your account balance.';
+         } elseif ($exception->getMessage() == 'Client error: 403') {
+             $this->error = 'Way to go, doofus. You\'ve been rate limited.';
          } else {
              $this->error = 'An unknown error occurred';
          }
