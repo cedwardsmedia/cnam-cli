@@ -19,6 +19,10 @@ error_reporting(E_ALL & ~E_NOTICE);
       // Check for help flags.
       if (in_array("--help", $ARGS) OR in_array("-h", $ARGS)){
             help();
+         } elseif (in_array("--version", $ARGS) OR in_array("-v", $ARGS)){
+      // Check for version flags
+            echo APPNAME . " " . VERSION;
+            exit(0);
          } else {
             //echo($ARGS[1]); die();
             $phone = $ARGS[1];
