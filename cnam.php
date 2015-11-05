@@ -37,8 +37,8 @@ error_reporting(E_ALL & ~E_NOTICE);
             /* If no error exists, let's check if any information was returned from EveryoneAPI. If not, we'll print an error and exit. If so, we'll print the dossier. */
 
             // Is the information available? If not, err and die
-               if ($api->cnam == "Unavailable") {
-                  echo("Error: Information for $phone is not available from EveryoneAPI.");
+               if ($api->data->data->cnam == "Unavailable") {
+                  echo("I'm sorry, but information for $phone is not available from EveryoneAPI.\n");
                   exit(3);
                } else {
 
