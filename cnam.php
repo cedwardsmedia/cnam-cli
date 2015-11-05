@@ -21,8 +21,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             help();
          } elseif (in_array("--version", $ARGS) OR in_array("-v", $ARGS)){
       // Check for version flags
-            echo APPNAME . " " . VERSION;
-            exit(0);
+            version();
          } else {
             //echo($ARGS[1]); die();
             $phone = $ARGS[1];
@@ -104,7 +103,13 @@ function hr() {
    echo "\n";
 }
 function usage() {
-   echo("Usage: cnam [OPTIONS]... [PHONE NUMBER]...\n\nTry 'cnam  --help' for more options.\n");
+   echo("Usage: cnam [PHONE NUMBER]\n\nTry 'cnam  --help' for more options.\n");
+   exit(0);
+}
+
+// Print version
+function version() {
+   echo APPNAME . " " . VERSION;
    exit(0);
 }
 
