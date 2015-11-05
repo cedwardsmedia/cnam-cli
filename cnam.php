@@ -6,11 +6,9 @@ require("bootstrap.inc.php");
 ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
-//echo($_SERVER['argv']); exit();
-
    // Process our arguments and flags
-   //$ARGS = ; // Get CLI arguments and flags
 
+   // Get CLI arguments and flags
    $ARGS = $_SERVER['argv'];
 
    //print_r($ARGS); die();
@@ -23,7 +21,6 @@ error_reporting(E_ALL & ~E_NOTICE);
       // Check for version flags
             version();
          } else {
-            //echo($ARGS[1]); die();
             $phone = $ARGS[1];
             $api = new APICaller();
             $api->api_call($phone);
