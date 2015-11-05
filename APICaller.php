@@ -61,6 +61,8 @@ class APICaller {
              $this->error = 'Way to go, doofus. You\'ve been rate limited.';
          } elseif ($exception->getMessage() == 'Client error: 404') {
              $this->error = 'Looks like I\'m the doofus this time. I can\'t find that phone number in the EveryoneAPI database.';
+         } elseif ($exception->getMessage() == 'Client error: 503') {
+             $this->error = 'Those doofuses at EveryoneAPI are having problems fulfilling this query. Please try again later.';
          } else {
              $this->error = 'An unknown error occurred';
          }
