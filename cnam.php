@@ -102,6 +102,8 @@ function hr() {
    }
    echo "\n";
 }
+
+// Print usage
 function usage() {
    echo("Usage: cnam [PHONE NUMBER]\n\nTry 'cnam  --help' for more options.\n");
    exit(0);
