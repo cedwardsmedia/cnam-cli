@@ -14,8 +14,13 @@ error_reporting(E_ALL & ~E_NOTICE);
    //print_r($ARGS); die();
    if ( array_key_exists("1",$ARGS) ) {
 
+      // Check for debug flag
+      if (in_array("--debug", $ARGS) OR in_array("-d", $ARGS)){
+            debug();
+
       // Check for help flags.
-      if (in_array("--help", $ARGS) OR in_array("-h", $ARGS)){
+
+         } elseif (in_array("--help", $ARGS) OR in_array("-h", $ARGS)){
             help();
          } elseif (in_array("--version", $ARGS) OR in_array("-v", $ARGS)){
       // Check for version flags
@@ -123,7 +128,17 @@ function help() {
 
 // Print Debug Info
 function debug() {
-   echo("\n------------------------------------\n");
-   echo($ARGS);
+   hr();
+   echo "DEBUG INFORMATION:\n";
+   hr();
+   echo APPNAME . " " . VERSION . "\n";
+   echo "Runtime Arguments:\n";
+   print_r($_SERVER['argv']); // Print runtime arguments
+   echo "\n";
+   include("config.php"); // Check config values
+   echo "Configuration:\n\nSID: $SID\nTOKEN: $TOKEN\n"; // Print API Credentials
+   echo "EveryoneAPI Version: " . APIVersion . "\n";
+   $git = shell_exec('git rev-parse HEAD');
+   if ($git) {echo "Current Commit: " . substr($git,0,8) . "\n";}
    exit(0);
 }
