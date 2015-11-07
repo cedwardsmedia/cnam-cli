@@ -1,7 +1,7 @@
-# CNAM v1.3
+# CNAM v1.3.1
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam)
-![Version](https://img.shields.io/badge/version-1.3-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.3.1-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -26,6 +26,13 @@ For **public** use:
 4. Enter your EveryoneAPI credentials and click "save changes"
 5. Enter a valid 10-digit United States or Canada phone number and click the ![Search](https://cdn.cedwardsmedia.com/images/cnam/search.png "Search") button or press enter.
 
+# Command-line client
+cnam.php offers a command-line client to the EveryoneAPI service. Currently, it piggybacks off the same config and API class as the web-based client. Before using the CLI client, make sure it is executable by running `chmod +x /path/to/cnam.php`.
+
+To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
+
+**Note:** for easier usage, you may wish to create a symlink to cnam php. To do this, simply execute `sudo ln -s /path/to/cnam.php /usr/local/cnam`. Now, you can execute cnam by simply running `cnam [phone number]` without including the path to cnam.php.
+
 ## Contributing
 
 1. Fork it!
@@ -36,7 +43,8 @@ For **public** use:
 
 ## History
 
- - **[_Nov 4, 2015_]: 1.3 Added command line tool - cnam.php**
+ - **[_Nov 6, 2014_]: 1.3.1 Added debug flag to CLI client and other minor tweaks**
+ - [_Nov 4, 2015_]: 1.3 Added command line tool - cnam.php
  - [_Nov 3, 2015_]: 1.2 Cleaned up code and organized files
  - [_Nov 2, 2015_]: 1.1 Added ability to export dossier in vCard format
  - [_Oct 25, 2015_]: 1.0 Ended βeta Testing - First Stable Release
