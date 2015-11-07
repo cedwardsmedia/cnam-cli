@@ -15,6 +15,7 @@ include 'config.php';
 
 define("APPNAME", "CNAM");
 define("VERSION", "1.3");
+define("APIVersion", "1");
 define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
 define("DEVELOPER", "Corey Edwards");
 define("COPYRIGHTYEAR", "2014 - 2015");

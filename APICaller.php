@@ -47,7 +47,7 @@ class APICaller {
 
       try {
          $response = $this->client
-             ->get("https://api.everyoneapi.com/v1/phone/$phone?".
+             ->get("https://api.everyoneapi.com/v" . APIVersion . "/phone/$phone?".
                  "account_sid={$this->sid}&".
                  "auth_token={$this->token}&");
       } catch (\Exception $exception) {
