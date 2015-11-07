@@ -4,8 +4,8 @@
 
 session_start();
 
-ini_set('display_errors', 0);
-error_reporting(E_ALL & ~E_NOTICE);
+ini_set('display_errors', 1);
+error_reporting(E_ALL & E_NOTICE);
 
 require 'vendor/autoload.php';
 require 'APICaller.php';
