@@ -23,4 +23,6 @@ if (phpversion() < "5.5") {
 
 require 'vendor/autoload.php';
 require 'APICaller.php';
-include 'config.php';
+if (file_exists("config.php")){
+   include 'config.php';
+}
