@@ -110,6 +110,3 @@ class APICaller {
    }
 
 }
-
-$api = new ApiCaller();
-$_POST['phone'] && $api->api_call($_POST['phone']);
