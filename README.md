@@ -14,17 +14,19 @@ _CNAM_ is a web-based reverse phone number lookup tool written in PHP and source
 For **personal** or **private** use:
 
 1. Clone the repo.
-2. Rename `config.default.php` to `config.php`.
-3. Edit `config.php` and add your EveryoneAPI credentials.
-4. Point your browser to index.php and enter a valid 10-digit United States or Canada phone number and click the ![Search](https://cdn.cedwardsmedia.com/images/cnam/search.png "Search") button or press enter.
+2. Run `php composer.phar install`
+3. Rename `config.default.php` to `config.php`.
+4. Edit `config.php` and add your EveryoneAPI credentials.
+5. Point your browser to index.php and enter a valid 10-digit United States or Canada phone number and click the ![Search](https://cdn.cedwardsmedia.com/images/cnam/search.png "Search") button or press enter.
 
 For **public** use:
 
 1. Clone the repo.
-2. Point your browser to index.php
-3. Click the ![Settings](https://cdn.cedwardsmedia.com/images/cnam/cog.png "Settings") icon
-4. Enter your EveryoneAPI credentials and click "save changes"
-5. Enter a valid 10-digit United States or Canada phone number and click the ![Search](https://cdn.cedwardsmedia.com/images/cnam/search.png "Search") button or press enter.
+2. Run `php composer.phar install`
+3. Point your browser to index.php
+4. Click the ![Settings](https://cdn.cedwardsmedia.com/images/cnam/cog.png "Settings") icon
+5. Enter your EveryoneAPI credentials and click "save changes"
+6. Enter a valid 10-digit United States or Canada phone number and click the ![Search](https://cdn.cedwardsmedia.com/images/cnam/search.png "Search") button or press enter.
 
 # Command-line client
 cnam.php offers a command-line client to the EveryoneAPI service. Currently, it piggybacks off the same config and API class as the web-based client. Before using the CLI client, make sure it is executable by running `chmod +x /path/to/cnam.php`.
