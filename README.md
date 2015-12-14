@@ -43,14 +43,6 @@ To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request ^^,
 
-## To-do:
-
-1. Add ability to save PDF copy of dossier
-2. Add modal with checkboxes to select data to query
-3. Don't query *everything* by default - costs too much
-4. Add ability to export dossier as CSV
-5. Brainstorm more features?
-
 ## Known Issues:
 
 1. Apple Contacts, Google Contacts, and others do not import avatar from exported vCard. This is an issue with the way these products parse vCard documents and is NOT a bug in CNAM. However, in the interest of interoperability, I will add base64 encoded images to the vCard format in a future release.
