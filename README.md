@@ -43,18 +43,6 @@ To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request ^^,
 
-## History
-
- - **[_Nov 6, 2014_]: 1.3.1 Added debug flag to CLI client and other minor tweaks**
- - [_Nov 4, 2015_]: 1.3 Added command line tool - cnam.php
- - [_Nov 3, 2015_]: 1.2 Cleaned up code and organized files
- - [_Nov 2, 2015_]: 1.1 Added ability to export dossier in vCard format
- - [_Oct 25, 2015_]: 1.0 Ended βeta Testing - First Stable Release
- - [_Oct 23, 2015_]: 1.0β Total restructure of code and first public release.
- - [_Oct 22, 2015_]: 0.2 Switched to exception catching for handling HTTP status codes.
- - [_Jul 2, 2015_]: 0.1 First working version produced.
- - [_Jun 8, 2015_]: Concept drafted.
-
 ## To-do:
 
 1. Add ability to save PDF copy of dossier
