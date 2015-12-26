@@ -26,9 +26,23 @@ error_reporting(E_ALL & ~E_NOTICE);
       // Check for version flags
             version();
          } else {
+
+      // Check for data point selection
+            if (in_array("--name", $ARGS)) { $datapoints = "name,"; }
+            if (in_array("--profile", $ARGS)){ $datapoints = $datapoints . "profile,"; }
+            if (in_array("--cnam", $ARGS)){ $datapoints = $datapoints . "cnam,"; }
+            if (in_array("--gender", $ARGS)){ $datapoints = $datapoints . "gender,"; }
+            if (in_array("--image", $ARGS)){ $datapoints = $datapoints . "image,"; }
+            if (in_array("--address", $ARGS)){ $datapoints = $datapoints . "address,"; }
+            if (in_array("--location", $ARGS)){ $datapoints = $datapoints . "location,"; }
+            if (in_array("--provider", $ARGS)){ $datapoints = $datapoints . "line_provider,"; }
+            if (in_array("--carrier", $ARGS)){ $datapoints = $datapoints . "carrier,"; }
+            if (in_array("--carrier_o", $ARGS)){ $datapoints = $datapoints . "carrier_o,"; }
+            if (in_array("--linetype", $ARGS)){ $datapoints = $datapoints . "linetype"; }
+
             $phone = $ARGS[1];
             $api = new APICaller();
-            $api->api_call($phone);
+            $api->api_call($phone, $datapoints);
 
 
             /* Let's check for API errors. They'll be returned in
@@ -53,39 +67,59 @@ error_reporting(E_ALL & ~E_NOTICE);
                      hr(); // Print a line
                      echo $api->data->data->cnam . "\n" ; // Print the CNAM
                      hr(); // Print a line
-            // Print Name
+
+                     // Print Name
+
+                     if (!$datapoints || in_array("--name", $ARGS)){
                      // Pick the title based on gender
-                     if ($api->data->data->gender == "M"){$title = "Mr.";} elseif ($api->data->data->gender == "F"){$title = "Ms.";}
-                     echo "Name:\n   " . $title ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n";
+                         if (!$datapoints || in_array("--gender", $ARGS)){
+                             if ($api->data->data->gender == "M"){$title = "Mr.";} elseif ($api->data->data->gender == "F"){$title = "Ms.";}
+                         }
+                         echo "Name:\n   " . $title ." " . $api->data->data->expanded_name->first . " " . $api->data->data->expanded_name->last ."\n\n";
+                     }
 
+                     if (!$datapoints || in_array("--address", $ARGS) || in_array("--location", $ARGS)){
                      // Print Address
-                     echo "Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n";
+                         echo "Address:\n   " . $api->data->data->address. "\n   " . $api->data->data->location->city . ", " . $api->data->data->location->state . " " . $api->data->data->location->zip . "\n\n";
+                     }
 
+                     if (!$datapoints || in_array("--gender", $ARGS)){
                      // Print Gender
-                     echo "Gender: ";
-                     if ($api->data->data->gender == "M"){echo "Male";} elseif ($api->data->data->gender == "F"){echo "Female";}
-                     echo "\n\n";
+                         echo "Gender: ";
+                         if ($api->data->data->gender == "M"){echo "Male";} elseif ($api->data->data->gender == "F"){echo "Female";}
+                         echo "\n\n";
+                     }
 
-                     // Print Relationship
-                     echo "Relationship:\n   " . $api->data->data->profile->relationship . "\n\n";
-
+                     if (!$datapoints || in_array("--image", $ARGS)){
                      // Print Image
-                     echo "Image:\n   http:" . $api->data->data->image->large . "\n\n";
+                        echo "Image:\n   http:" . $api->data->data->image->large . "\n\n";
+                     }
+
+                     if (!$datapoints || in_array("--profile", $ARGS)){
+                     // Print Relationship
+                         echo "Relationship:\n   " . $api->data->data->profile->relationship . "\n\n";
 
                      // Print Job
-                     echo "Job:\n   " . $api->data->data->profile->job . "\n\n";
+                         echo "Job:\n   " . $api->data->data->profile->job . "\n\n";
 
                      // Print Education
-                     echo "Edu:\n   " . $api->data->data->profile->edu . "\n\n";
+                         echo "Edu:\n   " . $api->data->data->profile->edu . "\n\n";
+                     }
 
+                     if (!$datapoints || in_array("--linetype", $ARGS)){
                      // Print Linetype
-                     echo "Linetype:\n   " . $api->data->data->linetype . "\n\n";
+                        echo "Linetype:\n   " . $api->data->data->linetype . "\n\n";
+                     }
 
+                     if (!$datapoints || in_array("--carrier_o", $ARGS) || in_array("--carrier", $ARGS)){
                      // Print Original Carrier
-                     echo "Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n";
+                        echo "Original Carrier:\n   " . $api->data->data->carrier_o->name . "\n\n";
+                     }
 
+                     if (!$datapoints || in_array("--carrier", $ARGS)){
                      // Print Current Carrier
-                     echo "Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n";
+                        echo "Current Carrier:\n   " . $api->data->data->carrier->name . "\n\n";
+                     }
 
                      hr();
                }
