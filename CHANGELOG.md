@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 
 ## [Work in Progress]
+
+#### Added
+- Added `--name` flag to query for the *name* data point.
+- Added `--profile` flag to query for the *profile* data point.
+- Added `--cnam` flag to query for the *cnam* data point.
+- Added `--gender` flag to query for the *gender* data point.
+- Added `--image` flag to query for the *image* data point.
+- Added `--address` flag to query for the *address* data point.
+- Added `--location` flag to query for the *location* data point.
+- Added `--provider` flag to query for the *provider* data point.
+- Added `--carrier` flag to query for the *carrier* data point.
+- Added `--carrier_o` flag to query for the *carrier_o* data point.
+- Added `--linetype` flag to query for the *linetype* data point.
+
 #### Changed
 - Moved project history to CHANGELOG.md
 - Changed dates in CHANGELOG.md to meet [ISO 8601 Standard](http://www.iso.org/iso/home/standards/iso8601.htm).

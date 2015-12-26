@@ -33,7 +33,25 @@ cnam.php offers a command-line client to the EveryoneAPI service. Currently, it 
 
 To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
 
-**Note:** for easier usage, you may wish to create a symlink to cnam php. To do this, simply execute `sudo ln -s /path/to/cnam.php /usr/local/cnam`. Now, you can execute cnam by simply running `cnam [phone number]` without including the path to cnam.php.
+**Data Point Flags**
+
+Running `cnam <phone_number>` without specifying any data point flags will cause CNAM to return all available data for the provided number.
+
+Providing one or more data point flags will cause CNAM to return ONLY the selected data points. Example: `cnam --name --carrier 5551234567` will cause CNAM to return only the name and carrier for the provided number.
+
+- Use the `--name` flag to query for the *name* data point.
+- Use the `--profile` flag to query for the *profile* data point.
+- Use the `--cnam` flag to query for the *cnam* data point.
+- Use the `--gender` flag to query for the *gender* data point.
+- Use the `--image` flag to query for the *image* data point.
+- Use the `--address` flag to query for the *address* data point.
+- Use the `--location` flag to query for the *location* data point. (Included free with `--address`)
+- Use the `--provider` flag to query for the *provider* data point.
+- Use the `--carrier` flag to query for the *carrier* data point.
+- Use the `--carrier_o` flag to query for the *carrier_o* data point. (Included free with `--carrier`)
+- Use the `--linetype` flag to query for the *linetype* data point.
+
+**Note:** for easier usage, you may wish to create a symlink to cnam.php. To do this, simply execute `sudo ln -s /path/to/cnam.php /usr/local/cnam`. Now, you can execute cnam by simply running `cnam [phone number]` without including the path to cnam.php.
 
 ## Contributing
 
@@ -46,7 +64,7 @@ To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
 ## Known Issues:
 
 1. Apple Contacts, Google Contacts, and others do not import avatar from exported vCard. This is an issue with the way these products parse vCard documents and is NOT a bug in CNAM. However, in the interest of interoperability, I will add base64 encoded images to the vCard format in a future release.
-2. There is currently no way to select specific fields to return in the query. As such, all current queries request all available data from EveryoneAPI. This will be added in an upcoming release.
+2. (Web only) There is currently no way to select specific fields to return in the query. As such, all current queries request all available data from EveryoneAPI. This will be added in an upcoming release. The command-line tool, cnam.php, is not affected by this.
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))
