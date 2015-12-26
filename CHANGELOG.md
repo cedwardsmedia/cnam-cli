@@ -1,6 +1,10 @@
-# CNAM Changelog
+# CNAM-CLI Changelog
 All notable changes to this project will be documented in this file.
 
+## Work in Progress
+
+#### Changed
+- Split web-based client off into [separate project](https://github.com/cedwardsmedia/webcnam)
 
 ## [1.4.0] - 2015-12-25
 
@@ -22,7 +26,7 @@ All notable changes to this project will be documented in this file.
 - Changed dates in CHANGELOG.md to meet [ISO 8601 Standard](http://www.iso.org/iso/home/standards/iso8601.htm).
 
 
-## [1.3.1] - 2015-11-06
+### [1.3.1] - 2015-11-06
 
 #### Added
 - Added debug flag to CLI client
