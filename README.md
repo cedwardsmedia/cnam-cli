@@ -31,13 +31,15 @@ For **public** use:
 # Command-line client
 cnam.php offers a command-line client to the EveryoneAPI service. Currently, it piggybacks off the same config and API class as the web-based client. Before using the CLI client, make sure it is executable by running `chmod +x /path/to/cnam.php`.
 
-To perform a lookup of a phone number: `php /path/to/cnam.php 5551234567`
+To perform a lookup of a phone number: `php /path/to/cnam.php [phonenumber] [--name]`
 
-**Data Point Flags**
+**Note:** for easier usage, you may wish to create a symlink to cnam.php. To do this, simply execute `sudo ln -s /path/to/cnam.php /usr/local/cnam`. Now, you can execute cnam by simply running `cnam [phone number]` without including the path to cnam.php.
+
+### Data Point Flags
 
 Running `cnam <phone_number>` without specifying any data point flags will cause CNAM to return all available data for the provided number.
 
-Providing one or more data point flags will cause CNAM to return ONLY the selected data points. Example: `cnam --name --carrier 5551234567` will cause CNAM to return only the name and carrier for the provided number.
+Providing one or more data point flags will cause CNAM to return ONLY the selected data points. Example: `cnam 5551234567 --name --carrier` will cause CNAM to return only the name and carrier for the provided number.
 
 - Use the `--name` flag to query for the *name* data point.
 - Use the `--profile` flag to query for the *profile* data point.
@@ -51,7 +53,7 @@ Providing one or more data point flags will cause CNAM to return ONLY the select
 - Use the `--carrier_o` flag to query for the *carrier_o* data point. (Included free with `--carrier`)
 - Use the `--linetype` flag to query for the *linetype* data point.
 
-**Note:** for easier usage, you may wish to create a symlink to cnam.php. To do this, simply execute `sudo ln -s /path/to/cnam.php /usr/local/cnam`. Now, you can execute cnam by simply running `cnam [phone number]` without including the path to cnam.php.
+
 
 ## Contributing
 
