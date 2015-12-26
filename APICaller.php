@@ -34,7 +34,7 @@ class APICaller {
      }
    }
 
-   public function api_call($phone) {
+   public function api_call($phone, $datapoints) {
 
       session_unset(); // Reset session variables for new query
 
@@ -47,7 +47,7 @@ class APICaller {
 
       try {
          $response = $this->client
-             ->get("https://api.everyoneapi.com/v" . APIVersion . "/phone/$phone?".
+             ->get("https://api.everyoneapi.com/v" . APIVersion . "/phone/$phone?data=$datapoints&".
                  "account_sid={$this->sid}&".
                  "auth_token={$this->token}&");
       } catch (\Exception $exception) {
