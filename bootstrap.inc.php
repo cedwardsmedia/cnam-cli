@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
 define("APPNAME", "CNAM");
-define("VERSION", "1.3");
+define("VERSION", "1.4.0");
 define("APIVersion", "1");
 define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
 define("DEVELOPER", "Corey Edwards");

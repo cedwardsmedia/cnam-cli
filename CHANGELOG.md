@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## [Work in Progress]
+## [1.4.0] - 2015-12-25
 
 #### Added
 - Added `--name` flag to query for the *name* data point.
