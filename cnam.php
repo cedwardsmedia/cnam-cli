@@ -7,7 +7,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 // Define our constants
 define("APPNAME", "CNAM");
-define("VERSION", "1.4.0");
+define("VERSION", "2.0.0");
 define("APIVersion", "1");
 define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
 define("DEVELOPER", "Corey Edwards");
