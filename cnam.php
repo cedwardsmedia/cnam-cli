@@ -74,8 +74,10 @@ require 'vendor/autoload.php';
             if (in_array("--linetype", $ARGS)){ $datapoints = $datapoints . "linetype"; }
 
             $phone = $ARGS[1];
-            $api = new APICaller();
-            $api->api_call($phone, $datapoints);
+            $api = new EveryonePHP();
+            $api->sid = SID;
+            $api->token = TOKEN;
+            $api->query($phone, $data);
 
 
             /* Let's check for API errors. They'll be returned in
