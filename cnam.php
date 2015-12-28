@@ -31,8 +31,16 @@ if (OS == "DARWIN" || OS == "LINUX" || stristr(OS, "BSD") || stristr(OS, "UNIX")
 // Define our config file
 define("CONFIGFILE", CONFIGPATH . "cnam.conf");
 
-// Load our config
-$config = parse_ini_file(CONFIGFILE);
+// Check for our config file
+if (file_exists(CONFIGFILE)) {
+    // Load our config
+    $config = parse_ini_file(CONFIGFILE);
+} else {
+    if (in_array("setup", $ARGS)){
+        echo "Warning: No config file found at " . CONFIGFILE . ".\nYou may create it using 'cnam setup'\n\n";
+    }
+}
+
 
 
 // Include our Composer dependencies
