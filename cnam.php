@@ -60,17 +60,18 @@ require 'vendor/autoload.php';
          } else {
 
       // Check for data point selection
-            if (in_array("--name", $ARGS)) { $datapoints = "name,"; }
-            if (in_array("--profile", $ARGS)){ $datapoints = $datapoints . "profile,"; }
-            if (in_array("--cnam", $ARGS)){ $datapoints = $datapoints . "cnam,"; }
-            if (in_array("--gender", $ARGS)){ $datapoints = $datapoints . "gender,"; }
-            if (in_array("--image", $ARGS)){ $datapoints = $datapoints . "image,"; }
-            if (in_array("--address", $ARGS)){ $datapoints = $datapoints . "address,"; }
-            if (in_array("--location", $ARGS)){ $datapoints = $datapoints . "location,"; }
-            if (in_array("--provider", $ARGS)){ $datapoints = $datapoints . "line_provider,"; }
-            if (in_array("--carrier", $ARGS)){ $datapoints = $datapoints . "carrier,"; }
-            if (in_array("--carrier_o", $ARGS)){ $datapoints = $datapoints . "carrier_o,"; }
-            if (in_array("--linetype", $ARGS)){ $datapoints = $datapoints . "linetype"; }
+            $data=array();
+            if (in_array("--name", $ARGS)) { array_push($data,"name"); }
+            if (in_array("--profile", $ARGS)){ array_push($data,"profile"); }
+            if (in_array("--cnam", $ARGS)){ array_push($data,"cnam"); }
+            if (in_array("--gender", $ARGS)){ array_push($data,"gender"); }
+            if (in_array("--image", $ARGS)){ array_push($data,"image"); }
+            if (in_array("--address", $ARGS)){ array_push($data,"address"); }
+            if (in_array("--location", $ARGS)){ array_push($data,"location"); }
+            if (in_array("--provider", $ARGS)){ array_push($data,"line_provider"); }
+            if (in_array("--carrier", $ARGS)){ array_push($data,"carrier"); }
+            if (in_array("--carrier_o", $ARGS)){ array_push($data,"carrier_o"); }
+            if (in_array("--linetype", $ARGS)){ array_push($data,"linetype"); }
 
             // Check for test flag to set testing number
             if (in_array("--test", $ARGS) || in_array("-t", $ARGS)){
