@@ -112,11 +112,7 @@ require 'vendor/autoload.php';
                      // Print Name
 
                      if (isset($api->results->data->expanded_name)){
-                     // Pick the title based on gender
-                         if (!$datapoints || in_array("--gender", $ARGS)){
-                             if ($api->results->data->gender == "M"){$title = "Mr.";} elseif ($api->results->data->gender == "F"){$title = "Ms.";}
-                         }
-                         echo "Name:\n   " . $title ." " . $api->results->data->expanded_name->first . " " . $api->results->data->expanded_name->last ."\n\n";
+                         echo "Name: " . $api->results->data->expanded_name->first . " " . $api->results->data->expanded_name->last ."\n\n";
                      }
 
                      if (isset($api->results->data->location)){
