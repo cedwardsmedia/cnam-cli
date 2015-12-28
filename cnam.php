@@ -170,6 +170,11 @@ require 'vendor/autoload.php';
                      // Print Current Carrier
                         echo "Line Provider: " . $api->results->data->line_provider->name . "\n\n";
                      }
+
+                     if (isset($api->results->note)){
+                     // Print Current Carrier
+                        echo "Note: " . $api->results->note . "\n\n";
+                     }
                      hr();
                }
             }
