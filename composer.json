@@ -1,5 +1,5 @@
 {
     "require": {
-        "cedwardsmedia/everyonephp": "*"
+        "cedwardsmedia/everyonephp": "~1.0"
     }
 }

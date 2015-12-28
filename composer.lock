@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "37473feb138249883d5f450ea34c83a0",
-    "content-hash": "cceabe5754b62379ca68119a106eba5e",
+    "hash": "436edd98ebb06f16e30eaa42698c640a",
+    "content-hash": "4eda78d15c71e095283fb7c821234e99",
     "packages": [
         {
             "name": "cedwardsmedia/everyonephp",
-            "version": "v1.0.0-beta1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cedwardsmedia/everyonephp.git",
-                "reference": "86b95d93f667875953a700f8d72ccd615c6deeab"
+                "reference": "5015abd789f5f9f4408f5c0d2f4b922386870e1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cedwardsmedia/everyonephp/zipball/86b95d93f667875953a700f8d72ccd615c6deeab",
-                "reference": "86b95d93f667875953a700f8d72ccd615c6deeab",
+                "url": "https://api.github.com/repos/cedwardsmedia/everyonephp/zipball/5015abd789f5f9f4408f5c0d2f4b922386870e1c",
+                "reference": "5015abd789f5f9f4408f5c0d2f4b922386870e1c",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "phone lookup",
                 "phone number"
             ],
-            "time": "2015-12-27 08:28:06"
+            "time": "2015-12-28 08:52:21"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -282,9 +282,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "cedwardsmedia/everyonephp": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
