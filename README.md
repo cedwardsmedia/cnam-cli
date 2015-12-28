@@ -1,7 +1,7 @@
-# CNAM-CLI v1.4.0
+# CNAM-CLI v2.0.0β
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam--cli-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam-cli)
-![Version](https://img.shields.io/badge/version-1.4.0-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.0.0--beta-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -11,9 +11,8 @@ _CNAM-CLI_ is a command-line client for [EveryoneAPI](https://www.everyoneapi.co
 
 1. Clone the repo.
 2. Run `php composer.phar install`
-3. Rename `config.default.php` to `config.php`.
-4. Edit `config.php` and add your EveryoneAPI credentials.
-5. Ensure it is executable by running `chmod +x /path/to/cnam.php`.
+3. Ensure cnam.php is executable by running `chmod +x /path/to/cnam.php`.
+4. Run `cnam setup` to set your EveryoneAPI credentials
 
 To perform a lookup of a phone number: `php /path/to/cnam.php [phonenumber] [--name]`
 
