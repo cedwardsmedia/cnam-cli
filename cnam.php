@@ -1,11 +1,23 @@
 #!/usr/bin/php
 <?php
 
-// Bootstrap our app
-require("bootstrap.inc.php");
+// Turn off error reporting
 ini_set('display_errors', 0);
 error_reporting(E_ALL & ~E_NOTICE);
 
+// Define our constants
+define("APPNAME", "CNAM");
+define("VERSION", "1.4.0");
+define("APIVersion", "1");
+define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
+define("DEVELOPER", "Corey Edwards");
+define("COPYRIGHTYEAR", "2014 - 2015");
+define("COPYRIGHT", "&copy; " . COPYRIGHTYEAR . " " . DEVELOPER);
+// Check which version of PHP we're using. If it's too old, die.
+if (phpversion() < "5.3") {
+   echo(APPNAME . " requires PHP 5.5 or greater. You are currently running PHP " . phpversion() . ". Please upgrade PHP.\n");
+   exit(1);
+}
 
 // Include our Composer dependencies
 require 'vendor/autoload.php';
