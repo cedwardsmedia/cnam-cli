@@ -106,7 +106,7 @@ require 'vendor/autoload.php';
             // No API errors and we have results from the API
             // Print Dossier
                      hr(); // Print a line
-                     echo $api->results->data->cnam . "\n" ; // Print the CNAM
+                     echo "CNAM: " . $api->results->data->cnam . "\n" ; // Print the CNAM
                      hr(); // Print a line
 
                      // Print Name
