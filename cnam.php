@@ -175,6 +175,12 @@ require 'vendor/autoload.php';
                      // Print Current Carrier
                         echo "Note: " . $api->results->note . "\n\n";
                      }
+
+                     if (isset($api->results->pricing->total)){
+                     // Print Current Carrier
+                        echo "Query Cost: " . $api->results->pricing->total . "\n";
+                     }
+
                      hr();
                }
             }
