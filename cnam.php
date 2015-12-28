@@ -54,6 +54,47 @@ require 'vendor/autoload.php';
    //print_r($ARGS); die();
    if ( array_key_exists("1",$ARGS) ) {
 
+       // Check for setup command
+       if (in_array("setup", $ARGS)){
+
+           if (file_exists(CONFIGFILE)){
+               echo "A config file already exists at " . CONFIGFILE . ".\nAs a precaution, you must delete the existing file before creating a new one.\n";
+               exit();
+           }
+
+           echo "Enter your EveryoneAPI credentials.\nThese can be found at https://www.everyoneapi.com/dashboard/account\n\n";
+           echo "SID: ";
+           $sid = trim(fgets(STDIN));
+           echo "TOKEN: ";
+           $token = trim(fgets(STDIN));
+
+$configdata = <<<CONF
+; CNAM-CLI Config File
+;
+; EveryoneAPI Credentials
+; These can be found at https://www.everyoneapi.com/dashboard/account
+
+[auth]
+SID = "$sid"
+TOKEN = "$token"
+CONF;
+            $origcfgmd5 = md5($configdata);
+            mkdir(CONFIGPATH);
+            if(is_writable(CONFIGPATH)){
+                file_put_contents(CONFIGFILE, $configdata);
+            } else {
+                echo "Cannot write to " . CONFIGPATH . ".\n";
+            }
+            $cfgmd5 = md5(file_get_contents(CONFIGFILE));
+            if ($origcfgmd5 == $cfgmd5) {
+                echo "Congratulations! You're ready to use CNAM!\n";
+                exit();
+            } else {
+                echo "Something went wrong. Please check " . CONFIGFILE . ".\n";
+                exit(1);
+            }
+       }
+
       // Check for debug flag
       if (in_array("--debug", $ARGS) || in_array("-d", $ARGS)){
             debug();
