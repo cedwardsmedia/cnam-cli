@@ -33,8 +33,7 @@ define("CONFIGFILE", CONFIGPATH . "cnam.conf");
 
 // Load our config
 $config = parse_ini_file(CONFIGFILE);
-define("SID", $config["SID"]);
-define("TOKEN", $config["TOKEN"]);
+
 
 // Include our Composer dependencies
 require 'vendor/autoload.php';
@@ -75,8 +74,8 @@ require 'vendor/autoload.php';
 
             $phone = $ARGS[1];
             $api = new EveryonePHP();
-            $api->sid = SID;
-            $api->token = TOKEN;
+            $api->sid = $config["SID"];
+            $api->token = $config["TOKEN"];
             $api->query($phone, $data);
 
 
