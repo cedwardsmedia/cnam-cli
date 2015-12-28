@@ -13,6 +13,8 @@ define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
 define("DEVELOPER", "Corey Edwards");
 define("COPYRIGHTYEAR", "2014 - 2015");
 define("COPYRIGHT", "&copy; " . COPYRIGHTYEAR . " " . DEVELOPER);
+define("OS", strtoupper(php_uname('s')));
+
 // Check which version of PHP we're using. If it's too old, die.
 if (phpversion() < "5.3") {
    echo(APPNAME . " requires PHP 5.5 or greater. You are currently running PHP " . phpversion() . ". Please upgrade PHP.\n");
