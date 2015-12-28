@@ -127,9 +127,11 @@ require 'vendor/autoload.php';
                          echo "\n\n";
                      }
 
-                     if (isset($api->results->data->image->large)){
+                     if (isset($api->results->data->image)){
                      // Print Image
-                        echo "Image:\n   http:" . $api->results->data->image->large . "\n\n";
+                        if (isset($api->results->data->image->large)){echo "Image (large): http:".$api->results->data->image->large."\n";}
+                        if (isset($api->results->data->image->cover)){echo "Image (cover): http:".$api->results->data->image->cover."\n";}
+                        echo "\n";
                      }
 
                      if (isset($api->results->data->profile)){
