@@ -110,7 +110,7 @@ require 'vendor/autoload.php';
 
                      // Print Name
 
-                     if (!$datapoints || in_array("--name", $ARGS)){
+                     if (isset($api->results->data->expanded_name)){
                      // Pick the title based on gender
                          if (!$datapoints || in_array("--gender", $ARGS)){
                              if ($api->results->data->gender == "M"){$title = "Mr.";} elseif ($api->results->data->gender == "F"){$title = "Ms.";}
@@ -118,45 +118,51 @@ require 'vendor/autoload.php';
                          echo "Name:\n   " . $title ." " . $api->results->data->expanded_name->first . " " . $api->results->data->expanded_name->last ."\n\n";
                      }
 
-                     if (!$datapoints || in_array("--address", $ARGS) || in_array("--location", $ARGS)){
+                     if (isset($api->results->data->location)){
                      // Print Address
                          echo "Address:\n   " . $api->results->data->address. "\n   " . $api->results->data->location->city . ", " . $api->results->data->location->state . " " . $api->results->data->location->zip . "\n\n";
                      }
 
-                     if (!$datapoints || in_array("--gender", $ARGS)){
+                     if (isset($api->results->data->gender)){
                      // Print Gender
                          echo "Gender: ";
                          if ($api->results->data->gender == "M"){echo "Male";} elseif ($api->results->data->gender == "F"){echo "Female";}
                          echo "\n\n";
                      }
 
-                     if (!$datapoints || in_array("--image", $ARGS)){
+                     if (isset($api->results->data->image->large)){
                      // Print Image
                         echo "Image:\n   http:" . $api->results->data->image->large . "\n\n";
                      }
 
-                     if (!$datapoints || in_array("--profile", $ARGS)){
-                     // Print Relationship
-                         echo "Relationship:\n   " . $api->results->data->profile->relationship . "\n\n";
+                     if (isset($api->results->data->profile)){
+                         // Print Relationship
+                         if (isset($api->results->data->profile->relationship)){
+                             echo "Relationship:\n   " . $api->results->data->profile->relationship . "\n\n";
+                         }
 
-                     // Print Job
-                         echo "Job:\n   " . $api->results->data->profile->job . "\n\n";
+                         if (isset($api->results->data->profile->job)){
+                         // Print Job
+                             echo "Job:\n   " . $api->results->data->profile->job . "\n\n";
+                         }
 
-                     // Print Education
-                         echo "Edu:\n   " . $api->results->data->profile->edu . "\n\n";
+                         if (isset($api->results->data->profile->edu)){
+                         // Print Education
+                             echo "Edu:\n   " . $api->results->data->profile->edu . "\n\n";
+                         }
                      }
 
-                     if (!$datapoints || in_array("--linetype", $ARGS)){
+                     if (isset($api->results->data->linetype)){
                      // Print Linetype
                         echo "Linetype:\n   " . $api->results->data->linetype . "\n\n";
                      }
 
-                     if (!$datapoints || in_array("--carrier_o", $ARGS) || in_array("--carrier", $ARGS)){
+                     if (isset($api->results->data->carrier_o->name)){
                      // Print Original Carrier
                         echo "Original Carrier:\n   " . $api->results->data->carrier_o->name . "\n\n";
                      }
 
-                     if (!$datapoints || in_array("--carrier", $ARGS)){
+                     if (isset($api->results->data->carrier->name)){
                      // Print Current Carrier
                         echo "Current Carrier:\n   " . $api->results->data->carrier->name . "\n\n";
                      }
