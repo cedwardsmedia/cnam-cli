@@ -21,6 +21,21 @@ if (phpversion() < "5.3") {
    exit(1);
 }
 
+// Determine our config path
+if (OS == "DARWIN" || OS == "LINUX" || stristr(OS, "BSD") || stristr(OS, "UNIX")){
+    define("CONFIGPATH", $_SERVER['HOME'] . DIRECTORY_SEPARATOR . ".cnam" . DIRECTORY_SEPARATOR);
+} elseif (OS == stristr(OS, "WINDOWS")){
+    define("CONFIGPATH", $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'] . DIRECTORY_SEPARATOR . ".cnam" . DIRECTORY_SEPARATOR);
+}
+
+// Define our config file
+define("CONFIGFILE", CONFIGPATH . "cnam.conf");
+
+// Load our config
+$config = parse_ini_file(CONFIGFILE);
+define("SID", $config["SID"]);
+define("TOKEN", $config["TOKEN"]);
+
 // Include our Composer dependencies
 require 'vendor/autoload.php';
 
