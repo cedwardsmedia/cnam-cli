@@ -1,5 +1,5 @@
 {
     "require": {
-        "cedwardsmedia/everyonephp": "v1.0.0-beta1"
+        "cedwardsmedia/everyonephp": "*"
     }
 }
