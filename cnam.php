@@ -137,33 +137,33 @@ require 'vendor/autoload.php';
                      if (isset($api->results->data->profile)){
                          // Print Relationship
                          if (isset($api->results->data->profile->relationship)){
-                             echo "Relationship:\n   " . $api->results->data->profile->relationship . "\n\n";
+                             echo "Relationship: " . $api->results->data->profile->relationship . "\n\n";
                          }
 
                          if (isset($api->results->data->profile->job)){
                          // Print Job
-                             echo "Job:\n   " . $api->results->data->profile->job . "\n\n";
+                             echo "Job: " . $api->results->data->profile->job . "\n\n";
                          }
 
                          if (isset($api->results->data->profile->edu)){
                          // Print Education
-                             echo "Edu:\n   " . $api->results->data->profile->edu . "\n\n";
+                             echo "Edu: " . $api->results->data->profile->edu . "\n\n";
                          }
                      }
 
                      if (isset($api->results->data->linetype)){
                      // Print Linetype
-                        echo "Linetype:\n   " . $api->results->data->linetype . "\n\n";
+                        echo "Linetype: " . $api->results->data->linetype . "\n\n";
                      }
 
                      if (isset($api->results->data->carrier_o->name)){
                      // Print Original Carrier
-                        echo "Original Carrier:\n   " . $api->results->data->carrier_o->name . "\n\n";
+                        echo "Original Carrier: " . $api->results->data->carrier_o->name . "\n\n";
                      }
 
                      if (isset($api->results->data->carrier->name)){
                      // Print Current Carrier
-                        echo "Current Carrier:\n   " . $api->results->data->carrier->name . "\n\n";
+                        echo "Current Carrier: " . $api->results->data->carrier->name . "\n\n";
                      }
 
                      hr();
