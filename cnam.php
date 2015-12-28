@@ -72,7 +72,13 @@ require 'vendor/autoload.php';
             if (in_array("--carrier_o", $ARGS)){ $datapoints = $datapoints . "carrier_o,"; }
             if (in_array("--linetype", $ARGS)){ $datapoints = $datapoints . "linetype"; }
 
-            $phone = $ARGS[1];
+            // Check for test flag to set testing number
+            if (in_array("--test", $ARGS) || in_array("-t", $ARGS)){
+                $phone = "5551234567";
+            } else {
+                $phone = $ARGS[1];
+            }
+
             $api = new EveryonePHP();
             $api->sid = $config["SID"];
             $api->token = $config["TOKEN"];
