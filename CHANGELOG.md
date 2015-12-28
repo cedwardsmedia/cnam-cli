@@ -1,10 +1,23 @@
 # CNAM-CLI Changelog
 All notable changes to this project will be documented in this file.
 
-## Work in Progress
+## [2.0.0] - 2015-12-28
+
+#### Added
+- Added `--test` flag to query the test number provided by EveryoneAPI
+- Added INI-based config file `cnam.conf`
+- Added check for file_exists(config) with a printed warning when no file found
+- Added `setup` command to write EveryoneAPI credentials to config file
+- Added ability to print line_provider, image->cover, note, and cost.
+
 
 #### Changed
+- Migrated from built-in APICaller to [EveryonePHP](http://github.com/cedwardsmedia/everyonephp)
+- Config file now located in ~/.cnam/
 - Split web-based client off into [separate project](https://github.com/cedwardsmedia/webcnam)
+
+#### Removed
+- config.php deprecated in favor of cnam.conf
 
 ## [1.4.0] - 2015-12-25
 
