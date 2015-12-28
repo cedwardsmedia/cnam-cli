@@ -6,6 +6,10 @@ require("bootstrap.inc.php");
 ini_set('display_errors', 0);
 error_reporting(E_ALL & ~E_NOTICE);
 
+
+// Include our Composer dependencies
+require 'vendor/autoload.php';
+
    // Process our arguments and flags
 
    // Get CLI arguments and flags
