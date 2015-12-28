@@ -208,17 +208,18 @@ function help() {
 
 // Print Debug Info
 function debug() {
-   hr();
-   echo "DEBUG INFORMATION:\n";
-   hr();
-   echo APPNAME . " " . VERSION . "\n";
-   echo "Runtime Arguments:\n";
-   print_r($_SERVER['argv']); // Print runtime arguments
-   echo "\n";
-   include("config.php"); // Check config values
-   echo "Configuration:\n\nSID: $SID\nTOKEN: $TOKEN\n"; // Print API Credentials
-   echo "EveryoneAPI Version: " . APIVersion . "\n";
-   $git = shell_exec('git rev-parse HEAD');
-   if ($git) {echo "Current Commit: " . substr($git,0,8) . "\n";}
-   exit(0);
+    global $config;
+    global $argv;
+    hr();
+    echo "DEBUG INFORMATION:\n";
+    hr();
+    echo APPNAME . " " . VERSION . "\n";
+    echo "Runtime Arguments:\n";
+    var_export($argv); // Print runtime arguments
+    echo "\n";
+    echo "Configuration:\n"; // Print API Credentials
+    echo "Config file: " . CONFIGFILE . "\n";
+    var_export($config);
+    echo "\n";
+    exit(0);
 }
