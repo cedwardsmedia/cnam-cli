@@ -1,6 +1,15 @@
 # CNAM-CLI Changelog
 All notable changes to this project will be documented in this file.
 
+## Work in Progress
+
+#### Added
+- Added manual page for `cnam`
+
+#### Changed
+- Moved source files to `src/` directory to maintain cleanliness of repo
+
+
 ## [2.0.0] - 2015-12-28
 
 #### Added
@@ -19,7 +28,7 @@ All notable changes to this project will be documented in this file.
 #### Removed
 - config.php deprecated in favor of cnam.conf
 
-## [1.4.0] - 2015-12-25
+### [1.4.0] - 2015-12-25
 
 #### Added
 - Added `--name` flag to query for the *name* data point.
