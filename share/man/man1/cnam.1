@@ -1,0 +1,109 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "CNAM" "1" "January 2016" "" ""
+.
+.SH "NAME"
+\fBcnam\fR \- CLI client for EveryoneAPI\.
+.
+.SH "SYNOPSIS"
+\fBcnam\fR <phone number> [options]
+.
+.SH "DESCRIPTION"
+\fBCNAM\fR is a command\-line client for EveryoneAPI written in PHP\. In order to use CNAM, you must have an EveryoneAPI account with available funds\.
+.
+.P
+More information about EveryoneAPI can be found here: \fIhttps://www\.everyoneapi\.com/pricing\fR
+.
+.SH "FIRST RUN"
+Run \fBcnam setup\fR to set your EveryoneAPI account credentials\. \fBCNAM\fR will ask for your API SID and TOKEN, then write this information to the config file \- \fB~/\.cnam/cnam\.conf\fR\.
+.
+.SH "OPTIONS"
+\fBData Points\fR
+.
+.P
+Running \fBcnam\fR with any of the following flags will cause CNAM to return \fIonly\fR that particular data point\.
+.
+.P
+Running \fBcnam\fR \fIwithout\fR any of the following flags will cause CNAM to return all available information from \fBEveryoneAPI\fR\.
+.
+.P
+\fINote:\fR These flags should come \fIAFTER\fR the phone number\.
+.
+.TP
+\fB\-\-name\fR
+Query for the \fIname\fR data point\.
+.
+.TP
+\fB\-\-profile\fR
+Query for the \fIprofile\fR data point\.
+.
+.TP
+\fB\-\-cnam\fR
+Query for the \fIcnam\fR data point\.
+.
+.TP
+\fB\-\-gender\fR
+Query for the \fIgender\fR data point\.
+.
+.TP
+\fB\-\-image\fR
+Query for the \fIimage\fR data point\.
+.
+.TP
+\fB\-\-address\fR
+Query for the \fIaddress\fR data point\.
+.
+.TP
+\fB\-\-location\fR
+Query for the \fIlocation\fR data point\. (Included free with \fB\-\-address\fR)
+.
+.TP
+\fB\-\-provider\fR
+Query for the \fIprovider\fR data point\.
+.
+.TP
+\fB\-\-carrier\fR
+Query for the \fIcarrier\fR data point\.
+.
+.TP
+\fB\-\-carrier_o\fR
+Query for the \fIcarrier_o\fR data point\. (Included free with \fB\-\-carrier\fR)
+.
+.TP
+\fB\-\-linetype\fR
+Query for the \fIlinetype\fR data point\.
+.
+.P
+\fBMisc\. Options\fR
+.
+.P
+These options offer additional functionality to \fBCNAM\fR but do not return results from EveryoneAPI\.
+.
+.TP
+\fB\-d\fR, \fB\-\-debug\fR
+Prints debug information to the screen\. Useful for reporting issues to the developer\.
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Prints help information to the screen\. Albeit, this manual page contains far more information\.
+.
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Prints version information to the screen\.
+.
+.TP
+\fB\-\-test\fR
+Queries EveryoneAPI using the testing number +15551234567\. Useful for testing your connection and ensuring EveryoneAPI is not experiencing downtime\.
+.
+.SH "CREDITS"
+\fBCNAM\fR uses \fBEveryonePHP\fR, an MIT\-licensed PHP class available through Composer\.
+.
+.SH "DISCLAIMER"
+\fBCNAM\fR is not endorsed by, sponsored by, or otherwise associated with OpenCNAM, EveryoneAPI, or Telo USA, Inc\.
+.
+.SH "AUTHOR"
+Corey Edwards <\fIhttps://www\.cedwardsmedia\.com/\fR>
+.
+.SH "SEE ALSO"
+
