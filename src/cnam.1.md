@@ -63,6 +63,10 @@ These options offer additional functionality to `CNAM` but do not return results
   Prints version information to the screen.
 * `--test`:
   Queries EveryoneAPI using the testing number +15551234567. Useful for testing your connection and ensuring EveryoneAPI is not experiencing downtime.
+* `--testconfig`, `-tc`:
+  Queries EveryoneAPI to test your credentials.  
+
+  **Note** this will cost **$.001** as `cnam` must request at least one data point. (I have reached out to EveryoneAPI about adding another no-cost means of verifying credentials. The most recent feedback is that they are considering it.)
 
 
 ## CREDITS

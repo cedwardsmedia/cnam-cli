@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 - Added manual page for `cnam`
+- Added `--testconfig` and `-tc` flags to test EveryoneAPI credentials.
 
 #### Changed
 - Moved source files to `src/` directory to maintain cleanliness of repo

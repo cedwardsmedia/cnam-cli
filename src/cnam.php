@@ -125,6 +125,20 @@ CONF;
             // Check for test flag to set testing number
             if (in_array("--test", $ARGS) || in_array("-t", $ARGS)){
                 $phone = "5551234567";
+            } elseif (in_array("--testconfig", $ARGS) || in_array("-tc", $ARGS)){
+                $phone = "16153756622";
+                array_push($data,"linetype");
+                $api = new EveryonePHP();
+                $api->sid = $config["SID"];
+                $api->token = $config["TOKEN"];
+                $api->query($phone, $data);
+                if ($api->results->data->linetype == "landline") {
+                    echo "EveryoneAPI Config Test: Passed\n";
+                    exit;
+                } else {
+                    echo "EveryoneAPI Config Test: Failed\nPlease check your credentials and run 'cnam setup' again.";
+                    exit;
+                }
             } else {
                 $phone = $ARGS[1];
             }
