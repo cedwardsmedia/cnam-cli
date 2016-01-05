@@ -36,6 +36,9 @@ Providing one or more data point flags will cause CNAM to return ONLY the select
 - Use the `--carrier_o` flag to query for the *carrier_o* data point. (Included free with `--carrier`)
 - Use the `--linetype` flag to query for the *linetype* data point.
 
+## Manual Page
+__CNAM-CLI__ comes with a UNIX man page located in `./share/man/man1`. You can view the man page using the `man` command or any graphical man page viewer.
+
 ## Web-based client
 The web-based client has been split off into a [separate project](https://github.com/cedwardsmedia/webcnam).
 
