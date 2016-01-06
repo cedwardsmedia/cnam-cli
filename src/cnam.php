@@ -6,30 +6,30 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL & ~E_NOTICE);
 
 // Define our constants
-define("APPNAME", "CNAM");
-define("VERSION", "2.0.0");
-define("APIVersion", "1");
-define("DEVGITHUB", "https://www.github.com/cedwardsmedia/cnam");
-define("DEVELOPER", "Corey Edwards");
-define("COPYRIGHTYEAR", "2014 - 2015");
-define("COPYRIGHT", "&copy; " . COPYRIGHTYEAR . " " . DEVELOPER);
-define("OS", strtoupper(php_uname('s')));
+define('APPNAME', 'CNAM');
+define('VERSION', '2.0.0');
+define('APIVersion', '1');
+define('DEVGITHUB', 'https://www.github.com/cedwardsmedia/cnam');
+define('DEVELOPER', 'Corey Edwards');
+define('COPYRIGHTYEAR', '2014 - 2015');
+define('COPYRIGHT', '&copy; ' . COPYRIGHTYEAR . ' ' . DEVELOPER);
+define('OS', strtoupper(php_uname('s')));
 
 // Check which version of PHP we're using. If it's too old, die.
-if (phpversion() < "5.3") {
-   echo(APPNAME . " requires PHP 5.5 or greater. You are currently running PHP " . phpversion() . ". Please upgrade PHP.\n");
+if (phpversion() < '5.3') {
+   echo(APPNAME . ' requires PHP 5.5 or greater. You are currently running PHP ' . phpversion() . ". Please upgrade PHP.\n");
    exit(1);
 }
 
 // Determine our config path
-if (OS == "DARWIN" || OS == "LINUX" || stristr(OS, "BSD") || stristr(OS, "UNIX")){
-    define("CONFIGPATH", $_SERVER['HOME'] . DIRECTORY_SEPARATOR . ".cnam" . DIRECTORY_SEPARATOR);
-} elseif (OS == stristr(OS, "WINDOWS")){
-    define("CONFIGPATH", $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'] . DIRECTORY_SEPARATOR . ".cnam" . DIRECTORY_SEPARATOR);
+if (OS == 'DARWIN' || OS == 'LINUX' || stristr(OS, 'BSD') || stristr(OS, 'UNIX')){
+    define('CONFIGPATH', $_SERVER['HOME'] . DIRECTORY_SEPARATOR . '.cnam' . DIRECTORY_SEPARATOR);
+} elseif (OS == stristr(OS, 'WINDOWS')){
+    define('CONFIGPATH', $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'] . DIRECTORY_SEPARATOR . '.cnam' . DIRECTORY_SEPARATOR);
 }
 
 // Define our config file
-define("CONFIGFILE", CONFIGPATH . "cnam.conf");
+define('CONFIGFILE', CONFIGPATH . 'cnam.conf');
 
 // Check for our config file
 if (file_exists(CONFIGFILE)) {
@@ -52,10 +52,10 @@ require 'vendor/autoload.php';
    $ARGS = $_SERVER['argv'];
 
    //print_r($ARGS); die();
-   if ( array_key_exists("1",$ARGS) ) {
+   if ( array_key_exists('1',$ARGS) ) {
 
        // Check for setup command
-       if (in_array("setup", $ARGS)){
+       if (in_array('setup', $ARGS)){
 
            if (file_exists(CONFIGFILE)){
                echo "A config file already exists at " . CONFIGFILE . ".\nAs a precaution, you must delete the existing file before creating a new one.\n";
@@ -63,9 +63,9 @@ require 'vendor/autoload.php';
            }
 
            echo "Enter your EveryoneAPI credentials.\nThese can be found at https://www.everyoneapi.com/dashboard/account\n\n";
-           echo "SID: ";
+           echo 'SID: ';
            $sid = trim(fgets(STDIN));
-           echo "TOKEN: ";
+           echo 'TOKEN: ';
            $token = trim(fgets(STDIN));
 
 $configdata = <<<CONF
@@ -96,43 +96,43 @@ CONF;
        }
 
       // Check for debug flag
-      if (in_array("--debug", $ARGS) || in_array("-d", $ARGS)){
+      if (in_array('--debug', $ARGS) || in_array('-d', $ARGS)){
             debug();
 
       // Check for help flags.
 
-         } elseif (in_array("--help", $ARGS) || in_array("-h", $ARGS)){
+         } elseif (in_array('--help', $ARGS) || in_array('-h', $ARGS)){
             help();
-         } elseif (in_array("--version", $ARGS) || in_array("-v", $ARGS)){
+         } elseif (in_array('--version', $ARGS) || in_array('-v', $ARGS)){
       // Check for version flags
             version();
          } else {
 
       // Check for data point selection
             $data=array();
-            if (in_array("--name", $ARGS)) { array_push($data,"name"); }
-            if (in_array("--profile", $ARGS)){ array_push($data,"profile"); }
-            if (in_array("--cnam", $ARGS)){ array_push($data,"cnam"); }
-            if (in_array("--gender", $ARGS)){ array_push($data,"gender"); }
-            if (in_array("--image", $ARGS)){ array_push($data,"image"); }
-            if (in_array("--address", $ARGS)){ array_push($data,"address"); }
-            if (in_array("--location", $ARGS)){ array_push($data,"location"); }
-            if (in_array("--provider", $ARGS)){ array_push($data,"line_provider"); }
-            if (in_array("--carrier", $ARGS)){ array_push($data,"carrier"); }
-            if (in_array("--carrier_o", $ARGS)){ array_push($data,"carrier_o"); }
-            if (in_array("--linetype", $ARGS)){ array_push($data,"linetype"); }
+            if (in_array('--name', $ARGS)) { array_push($data,'name'); }
+            if (in_array('--profile', $ARGS)){ array_push($data,'profile'); }
+            if (in_array('--cnam', $ARGS)){ array_push($data,'cnam'); }
+            if (in_array('--gender', $ARGS)){ array_push($data,'gender'); }
+            if (in_array('--image', $ARGS)){ array_push($data,'image'); }
+            if (in_array('--address', $ARGS)){ array_push($data,'address'); }
+            if (in_array('--location', $ARGS)){ array_push($data,'location'); }
+            if (in_array('--provider', $ARGS)){ array_push($data,'line_provider'); }
+            if (in_array('--carrier', $ARGS)){ array_push($data,'carrier'); }
+            if (in_array('--carrier_o', $ARGS)){ array_push($data,'carrier_o'); }
+            if (in_array('--linetype', $ARGS)){ array_push($data,'linetype'); }
 
             // Check for test flag to set testing number
-            if (in_array("--test", $ARGS) || in_array("-t", $ARGS)){
-                $phone = "5551234567";
-            } elseif (in_array("--testconfig", $ARGS) || in_array("-tc", $ARGS)){
-                $phone = "16153756622";
-                array_push($data,"linetype");
+            if (in_array('--test', $ARGS) || in_array('-t', $ARGS)){
+                $phone = '5551234567';
+            } elseif (in_array('--testconfig', $ARGS) || in_array('-tc', $ARGS)){
+                $phone = '16153756622';
+                array_push($data,'linetype');
                 $api = new EveryonePHP();
-                $api->sid = $config["SID"];
-                $api->token = $config["TOKEN"];
+                $api->sid = $config['SID'];
+                $api->token = $config['TOKEN'];
                 $api->query($phone, $data);
-                if ($api->results->data->linetype == "landline") {
+                if ($api->results->data->linetype == 'landline') {
                     echo "EveryoneAPI Config Test: Passed\n";
                     exit;
                 } else {
@@ -144,8 +144,8 @@ CONF;
             }
 
             $api = new EveryonePHP();
-            $api->sid = $config["SID"];
-            $api->token = $config["TOKEN"];
+            $api->sid = $config['SID'];
+            $api->token = $config['TOKEN'];
             $api->query($phone, $data);
 
 
@@ -271,14 +271,14 @@ function usage() {
 
 // Print version
 function version() {
-   echo APPNAME . " " . VERSION . "\n";
+   echo APPNAME . ' ' . VERSION . "\n";
    exit(0);
 }
 
 // Print Help
 function help() {
-   echo APPNAME . " " . VERSION . " by " . DEVELOPER . "\n";
-   echo "© " . COPYRIGHTYEAR . " All Rights Reserved.\n\n";
+   echo APPNAME . ' ' . VERSION . ' by ' . DEVELOPER . "\n";
+   echo '© ' . COPYRIGHTYEAR . " All Rights Reserved.\n\n";
    echo "Command-line client for EveryoneAPI.\nRun `cnam` without any arguments for usage information.\n";
    exit(0);
 }
