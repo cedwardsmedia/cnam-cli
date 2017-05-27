@@ -1,17 +1,23 @@
 # CNAM-CLI Changelog
 All notable changes to this project will be documented in this file.
 
-## Work in Progress
+## [2.0.2] - 2017-05-27
+
+#### Changed
+- CNAM now requires EveryonePHP v1.0.2 for security fixes (https://github.com/cedwardsmedia/everyonephp/releases/tag/v1.0.2)
+
+## [2.0.1] - 2017-05-23
 
 #### Added
 - Added manual page for `cnam`
 - Added `--testconfig` and `-tc` flags to test EveryoneAPI credentials.
+- Added install.sh and uninstall.sh scripts
 
 #### Changed
 - Moved source files to `src/` directory to maintain cleanliness of repo
 
 
-## [2.0.0] - 2015-12-28
+### [2.0.0] - 2015-12-28
 
 #### Added
 - Added `--test` flag to query the test number provided by EveryoneAPI

@@ -1,9 +1,10 @@
-# CNAM-CLI v2.0.1
+# CNAM-CLI v2.0.2
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/cnam--cli-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/cnam-cli)
-![Version](https://img.shields.io/badge/version-2.0.1-brightgreen.svg?style=flat-square)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
+[![Version](https://img.shields.io/badge/version-2.0.2-brightgreen.svg?style=flat-square)]()
+[![License](https://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat-square "License")](./LICENSE.md)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
+
 
 _CNAM-CLI_ is a command-line client for [EveryoneAPI](https://www.everyoneapi.com/) written in PHP. In order to use CNAM, you must have an [EveryoneAPI account](https://www.everyoneapi.com/sign-up)  with [available funds](https://www.everyoneapi.com/pricing).
 
@@ -55,4 +56,3 @@ _CNAM-CLI_ is licensed under the **MIT License**. See LICENSE for more.
 
 ---
 **Disclaimer**: _CNAM-CLI_ is not endorsed by, sponsored by, or otherwise associated with [OpenCNAM](http://www.opencnam.com), [EveryoneAPI](http://www.everyoneapi.com), or [Telo USA, Inc](http://www.telo.com).
-
