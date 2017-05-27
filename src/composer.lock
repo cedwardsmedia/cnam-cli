@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4eda78d15c71e095283fb7c821234e99",
+    "content-hash": "1ce1b784e0a305bd6bb71c314c51c648",
     "packages": [
         {
             "name": "cedwardsmedia/everyonephp",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cedwardsmedia/everyonephp.git",
-                "reference": "f043bbec5bc40a1d99733fc57bc61e346ec4a4d0"
+                "reference": "56a9dfec1eaeea6743ac7e2980b89589a2f0f3d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cedwardsmedia/everyonephp/zipball/f043bbec5bc40a1d99733fc57bc61e346ec4a4d0",
-                "reference": "f043bbec5bc40a1d99733fc57bc61e346ec4a4d0",
+                "url": "https://api.github.com/repos/cedwardsmedia/everyonephp/zipball/56a9dfec1eaeea6743ac7e2980b89589a2f0f3d0",
+                "reference": "56a9dfec1eaeea6743ac7e2980b89589a2f0f3d0",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "phone lookup",
                 "phone number"
             ],
-            "time": "2017-05-23T06:56:54+00:00"
+            "time": "2017-05-27T05:52:16+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
